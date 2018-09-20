@@ -1,6 +1,5 @@
 
 
 
-import myPlugin from './lib'
 
-export default myPlugin;
+module.exports = require('./lib');
