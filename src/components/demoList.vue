@@ -25,7 +25,7 @@ export default {
           url:'/promises'
         },
         {
-          name:'flex',
+          name:'封装npm包使用',
           url:'/flex'
         },
         {
@@ -35,6 +35,10 @@ export default {
         {
           name:'JS的节流、防抖及使用场景',
           url:'/debounce'
+        },
+        {
+          name:'Input各种坑',
+          url:'/Inputs'
         }
       ]
     }

@@ -9,6 +9,8 @@ import vueRouter from '@/components/common/vueRouter'
 import routerOne from '@/components/common/Router/router_one'
 import routerTwo from '@/components/common/Router/router_two'
 import debounce from '@/components/common/debounce'
+import Input from '@/components/common/Input'
+
 
 
 Vue.use(Router)
@@ -53,6 +55,11 @@ export default new Router({
       path: '/debounce',
       name: 'debounce',
       component: debounce,
+    },
+    {
+      path: '/Inputs',
+      name: 'Input',
+      component: Input,
     }
   ]
 })

@@ -3,11 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import vpay from './lib/vpay'
+import vpay from 'yxl_vpay'
 
 Vue.use(vpay);
 
 Vue.config.productionTip = false
+
+import './assets/css/common.css'
 
 /* eslint-disable no-new */
 router.beforeEach((to,form,next)=>{
