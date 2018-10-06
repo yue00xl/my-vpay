@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 import vpay from 'yxl_vpay'
 
 Vue.use(vpay);
@@ -26,6 +27,7 @@ router.beforeEach((to,form,next)=>{
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

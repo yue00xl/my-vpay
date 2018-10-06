@@ -1,12 +1,29 @@
 <template>
   <div id="app">
+    <default-header :title="headersTitle"></default-header>
     <router-view/>
   </div>
 </template>
 
 <script>
+import defaultHeader from '@/components/public/defaultHeader'
+import {mapState} from 'vuex'
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    defaultHeader
+  },
+  data(){
+    return{
+      
+    }
+  },
+  computed:{
+    ...mapState(['headersTitle'])
+  },
+  methods:{
+    
+  }
 }
 </script>
 

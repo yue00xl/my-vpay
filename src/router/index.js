@@ -10,6 +10,8 @@ import routerOne from '@/components/common/Router/router_one'
 import routerTwo from '@/components/common/Router/router_two'
 import debounce from '@/components/common/debounce'
 import Input from '@/components/common/Input'
+import popState from '@/components/common/popstate'
+import uploadFile from '@/components/common/uploadFile'
 
 
 
@@ -60,6 +62,16 @@ export default new Router({
       path: '/Inputs',
       name: 'Input',
       component: Input,
+    },
+    {
+      path: '/popstate',
+      name: 'popState',
+      component: popState,
+    },
+    {
+      path: '/uploadfile',
+      name: 'uploadFile',
+      component: uploadFile
     }
   ]
 })

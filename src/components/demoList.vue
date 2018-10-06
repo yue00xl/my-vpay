@@ -1,8 +1,7 @@
 <template>
   <div class="hello">
-     <h1>{{msg}}</h1>
      <ul>
-        <li v-for="(item,index) in demolist" :key="index">
+        <li class="list" v-for="(item,index) in demolist" :key="index">
             <router-link :to="item.url">{{item.name}}</router-link>
         </li>
      </ul>
@@ -39,6 +38,14 @@ export default {
         {
           name:'Input各种坑',
           url:'/Inputs'
+        },
+        {
+          name:'监听浏览器返回',
+          url:'/popstate'
+        },
+        {
+          name:'上传视频前进行预览',
+          url:'/uploadfile'
         }
       ]
     }
@@ -48,4 +55,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.list{
+  width: 100%;
+  height: 40px;
+  border: 1px solid #ccc;
+}
+.list a{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>
