@@ -2,7 +2,7 @@
   <div id="app">
     <default-header :title="headersTitle"></default-header>
     <router-view/>
-    <div>sdfsdsss</div>
+    <div>sdfsdssssssqqq</div>
   </div>
 </template>
 
