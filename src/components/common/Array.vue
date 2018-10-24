@@ -2,6 +2,11 @@
 
 <template>
     <div>
+        <p>1- 将数组中具有相同值的对象 组成一个新的数组</p>
+        <ul>
+            <li v-for="item in sortArray">{{item}}</li>
+        </ul>
+        <p>2 -将多个对象合并成一个对象</p>
         {{o1}}
     </div>
 </template>
@@ -20,9 +25,10 @@ export default{
         }
     },
     mounted(){
-        // console.log(this.sortArr(this.sortArray,'name'))
+        this.sortArray = this.sortArr(this.sortArray,'name')
+        
         // this.o1 = Object.assign(this.o1,{a:1,b:2})  //不会触发更新
-        // this.o1 = Object.assign({},this.o1,{a:1,b:2}) // 会触发更新  
+        this.o1 = Object.assign({},this.o1,{a:1,b:2}) // 会触发更新  
     },
     methods:{
         sortArr(arr,str){
