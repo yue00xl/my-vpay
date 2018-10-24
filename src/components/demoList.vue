@@ -46,6 +46,10 @@ export default {
         {
           name:'上传视频前进行预览',
           url:'/uploadfile'
+        },
+        {
+          name:'Array',
+          url:'/array'
         }
       ]
     }

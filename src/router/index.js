@@ -12,6 +12,7 @@ import debounce from '@/components/common/debounce'
 import Input from '@/components/common/Input'
 import popState from '@/components/common/popstate'
 import uploadFile from '@/components/common/uploadFile'
+import Arrays from '@/components/common/Array'
 
 
 
@@ -72,6 +73,11 @@ export default new Router({
       path: '/uploadfile',
       name: 'uploadFile',
       component: uploadFile
+    },
+    {
+      path: '/array',
+      name: 'array',
+      component: Arrays
     }
   ]
 })
