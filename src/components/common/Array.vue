@@ -7,7 +7,8 @@
             <li v-for="item in sortArray">{{item}}</li>
         </ul>
         <p>2 -将多个对象合并成一个对象</p>
-        {{o1}}
+        <div>{{o1}}</div>
+        <p>3 - </p>
     </div>
 </template>
 
@@ -64,4 +65,16 @@ export default{
     }
 }
 </script>
+
+<style scoped>
+p{
+    border-bottom: 1px solid #ccc;
+    margin: 15px 0;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
+
 

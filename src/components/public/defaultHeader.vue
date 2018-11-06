@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="headers">
+        <div class="headers" ref="defaultHeader">
             <span @click="goback">返回</span>
             <h1>{{title}}</h1>
         </div>
@@ -19,9 +19,13 @@ export default{
     data(){
         return{}
     },
+    mounted(){
+        
+    },
     methods:{
         goback(){
-            history.back(-1);
+            this.$store.commit('HEADERTITLE','首页');
+            this.$router.go(-1)
         }
     }
 }

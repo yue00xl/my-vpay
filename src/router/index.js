@@ -13,8 +13,9 @@ import Input from '@/components/common/Input'
 import popState from '@/components/common/popstate'
 import uploadFile from '@/components/common/uploadFile'
 import Arrays from '@/components/common/Array'
-
-
+import Functions from '@/components/common/function'
+import vueSlot from '@/components/common/vue_slot'
+import vueSlot2 from '@/components/common/vue_slot2'
 
 Vue.use(Router)
 
@@ -78,6 +79,21 @@ export default new Router({
       path: '/array',
       name: 'array',
       component: Arrays
-    }
+    },
+    {
+      path: '/function',
+      name: 'function',
+      component: Functions
+    },
+    {
+      path: '/vue_slot',
+      name: 'slot',
+      component: vueSlot
+    },
+    {
+      path: '/vue_slot2',
+      name: 'slot2',
+      component: vueSlot2
+    },
   ]
 })

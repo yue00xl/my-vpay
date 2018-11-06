@@ -48,8 +48,20 @@ export default {
           url:'/uploadfile'
         },
         {
-          name:'Array',
+          name:'数组和对象的一些操作',
           url:'/array'
+        },
+        {
+          name:'函数传参更优雅的方式',
+          url:'/function'
+        },
+        {
+          name:'vue-slot的使用-1',
+          url:'/vue_slot'
+        },
+        {
+          name:'vue-slot的使用-2',
+          url:'/vue_slot2'
         }
       ]
     }

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <default-header :title="headersTitle"></default-header>
-    <router-view/>
+    <default-header :title="headersTitle" ref="defaultHeader"></default-header>
+    <router-view  class="router_view" :style="{height:routerHeight+'px'}"/>
   </div>
 </template>
 
@@ -15,8 +15,14 @@ export default {
   },
   data(){
     return{
-      
+      Header:'',
+      routerHeight:''
     }
+  },
+  mounted(){
+    this.$store.commit('HEADERTITLE','首页');
+    this.Header = this.$refs.defaultHeader.$refs.defaultHeader.clientHeight;
+    this.routerHeight = window.innerHeight - this.Header;
   },
   computed:{
     ...mapState(['headersTitle'])
@@ -43,5 +49,9 @@ body,html{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.router_view{
+  height: 100%;
+  overflow: auto;
 }
 </style>
