@@ -16,6 +16,7 @@ import Arrays from '@/components/common/Array'
 import Functions from '@/components/common/function'
 import vueSlot from '@/components/common/vue_slot'
 import vueSlot2 from '@/components/common/vue_slot2'
+import elseSwitch from '@/components/common/elseSwitch'
 
 Vue.use(Router)
 
@@ -94,6 +95,11 @@ export default new Router({
       path: '/vue_slot2',
       name: 'slot2',
       component: vueSlot2
+    },
+    {
+      path: '/else_switch',
+      name: 'elseSwitch',
+      component: elseSwitch
     },
   ]
 })

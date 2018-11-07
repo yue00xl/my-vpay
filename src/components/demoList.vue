@@ -62,6 +62,10 @@ export default {
         {
           name:'vue-slot的使用-2',
           url:'/vue_slot2'
+        },
+        {
+          name:'JavaScript 复杂判断的更优雅写法',
+          url:'/else_switch'
         }
       ]
     }

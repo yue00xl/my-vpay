@@ -16,7 +16,7 @@
 
         <vue-slot :arrlist="arrList">
             <template slot-scope="scope">
-                <p>id是---{{scope.element.id}}</p> <!--在这里进行自定义 可以插入一个组件-->
+                <p>将组件中的模版覆盖---{{scope.element.id}}</p> <!--在这里进行自定义 可以插入一个组件-->
             </template>
         </vue-slot>
     </div>
