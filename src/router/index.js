@@ -17,6 +17,7 @@ import Functions from '@/components/common/function'
 import vueSlot from '@/components/common/vue_slot'
 import vueSlot2 from '@/components/common/vue_slot2'
 import elseSwitch from '@/components/common/elseSwitch'
+import vueModel from '@/components/common/vue_model'
 
 Vue.use(Router)
 
@@ -101,5 +102,10 @@ export default new Router({
       name: 'elseSwitch',
       component: elseSwitch
     },
+    {
+      path: '/vuemodel',
+      name: 'vueModel',
+      component: vueModel
+    }
   ]
 })

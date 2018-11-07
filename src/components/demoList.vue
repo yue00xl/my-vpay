@@ -66,6 +66,10 @@ export default {
         {
           name:'JavaScript 复杂判断的更优雅写法',
           url:'/else_switch'
+        },
+        {
+          name:'vue双向绑定v-model',
+          url:'/vuemodel'
         }
       ]
     }
