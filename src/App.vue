@@ -20,9 +20,9 @@ export default {
     }
   },
   mounted(){
-    this.$store.commit('HEADERTITLE','首页');
-    this.Header = this.$refs.defaultHeader.$refs.defaultHeader.clientHeight;
-    this.routerHeight = window.innerHeight - this.Header;
+    // this.$store.commit('HEADERTITLE','首页');
+    // this.Header = this.$refs.defaultHeader.$refs.defaultHeader.clientHeight;
+    // this.routerHeight = window.innerHeight - this.Header;
   },
   computed:{
     ...mapState(['headersTitle'])
@@ -47,8 +47,6 @@ body,html{
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 .router_view{
   height: 100%;

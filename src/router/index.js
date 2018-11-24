@@ -18,6 +18,8 @@ import vueSlot from '@/components/common/vue_slot'
 import vueSlot2 from '@/components/common/vue_slot2'
 import elseSwitch from '@/components/common/elseSwitch'
 import vueModel from '@/components/common/vue_model'
+import algorithm from '@/components/common/algorithm'
+import sortTable from '@/components/common/Sortable'
 
 Vue.use(Router)
 
@@ -106,6 +108,16 @@ export default new Router({
       path: '/vuemodel',
       name: 'vueModel',
       component: vueModel
+    },
+    {
+      path: '/algorithm',
+      name: 'algorithm',
+      component: algorithm
+    },
+    {
+      path: '/sortTable',
+      name: 'sortTable',
+      component: sortTable
     }
   ]
 })

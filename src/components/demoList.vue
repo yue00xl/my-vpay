@@ -70,6 +70,14 @@ export default {
         {
           name:'vue双向绑定v-model',
           url:'/vuemodel'
+        },
+        {
+          name:'js基础算法',
+          url:'/algorithm'
+        },
+        {
+          name:'基于element-ui table拖动排序',
+          url:'/sortTable'
         }
       ]
     }

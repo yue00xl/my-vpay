@@ -32,7 +32,7 @@ export default{
 </script>
 
 
-<style>
+<style scoped>
 .headers{
     display: flex;
     justify-content: center;

@@ -1,9 +1,13 @@
 
 
 <template>
-    <div class="suctionTop">
+    <div class="suctionTop" ref="suctionTop">
         <div class="top"></div>
-        <h2 id="fixedHeaderRoot" :class="{'isFixed':headerFixed}">测试标题</h2>
+        <h2 ref="fixedHeaderRoot" id="fixedHeaderRoot" :class="{'isFixed':headerFixed}">
+            <span v-for="item in 100">
+                {{item}}
+            </span>
+        </h2>
         <div class="bottom">
             <ul>
                 <li v-for="item in 100">{{item}}</li>
@@ -23,12 +27,14 @@ export default{
     },
     mounted(){
         // handleScroll为页面滚动的监听回调
-        window.addEventListener('scroll', this.handleScroll);
-        this.init();
+        this.$nextTick(function(){
+            this.$refs.suctionTop.addEventListener('scroll', this.handleScroll);
+            this.init();
+        })
     },
-    destroyed(){
-        window.removeEventListener('scroll', this.handleScroll);
-    },
+    // destroyed(){
+    //     window.removeEventListener('scroll', this.handleScroll);
+    // },
     methods:{
         init(){
             this.$nextTick(function(){
@@ -41,7 +47,9 @@ export default{
         },
         handleScroll(){
             // 得到页面滚动的距离
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            let _this = this;
+            let scrollTop = _this.$refs.suctionTop.scrollTop;
+            
             // 判断页面滚动的距离是否大于吸顶元素的位置
             this.headerFixed = scrollTop > (this.offsetTop - this.offsetHeight);
             console.log(this.headerFixed)
@@ -76,6 +84,11 @@ h2{
     top: 0;
     left: 0;
     right: 0;
+}
+#fixedHeaderRoot{
+    display: flex;
+    width: 100%;
+    overflow-x: scroll;
 }
 </style>
 
