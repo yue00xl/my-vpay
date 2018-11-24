@@ -110,7 +110,8 @@ export default{
         },
         handleCurrentChange(val){
             console.log(val);
-        }
+        },
+        changesCheck(){}
     }
 }
 </script>
