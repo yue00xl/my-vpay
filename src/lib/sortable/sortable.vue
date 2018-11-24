@@ -6,7 +6,9 @@
             :data="value"
             border
             :row-key="sortIndex"
-            style="width: 100%">
+            style="width: 100%"
+            align='center'
+            :row-style="{height:'60px'}">
             <slot></slot>
         </el-table>
         <div class="sort-el-pagination" v-if="option">

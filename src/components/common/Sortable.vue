@@ -30,6 +30,13 @@
                 </el-table-column>
             </template>
         </sort-table>
+
+        <el-tree :data="trees"  style="margin-top: 20px;">
+            <span class="custom-tree-node" slot-scope="{ node, data }">
+                <p v-if="!data.leaf" style="font-size: 14px;"> {{data.name}}</p>
+                <el-checkbox v-if="data.leaf" @change="changesCheck(data.name)">{{data.name}}</el-checkbox>
+            </span>
+        </el-tree>
     </div>
 </template>
 
@@ -43,6 +50,30 @@ export default{
     },
     data(){
         return{
+            trees: [{
+                name: '一级目录1',
+                leaf:false,
+                children: [{
+                    name: '二级分类名称',
+                    leaf:true
+                },{
+                    name: '二级分类名称',
+                    leaf:true
+                },{
+                    name: '二级分类名称',
+                    leaf:true
+                }]
+            }, {
+                name: '一级目录2',
+                leaf:false,
+                children: [{
+                    name: '二级目录1',
+                    leaf:true
+                }, {
+                    name: '二级目录2',
+                    leaf:true
+                }]
+            }],
             tableData:[
             {
                 index:'1',
