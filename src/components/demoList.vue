@@ -78,7 +78,15 @@ export default {
         {
           name:'基于element-ui table拖动排序',
           url:'/sortTable'
-        }
+        },
+        {
+          name:'wangEditor富文本编辑器',
+          url:'/wangEditor'
+        },
+        {
+          name:'a链接上绑定事件请求接口',
+          url:'/wx'
+        },
       ]
     }
   }

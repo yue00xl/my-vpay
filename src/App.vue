@@ -20,9 +20,9 @@ export default {
     }
   },
   mounted(){
-    // this.$store.commit('HEADERTITLE','首页');
-    // this.Header = this.$refs.defaultHeader.$refs.defaultHeader.clientHeight;
-    // this.routerHeight = window.innerHeight - this.Header;
+    this.$store.commit('HEADERTITLE','首页');
+    this.Header = this.$refs.defaultHeader.$refs.defaultHeader.clientHeight;
+    this.routerHeight = window.innerHeight - this.Header;
   },
   computed:{
     ...mapState(['headersTitle'])
@@ -50,6 +50,6 @@ body,html{
 }
 .router_view{
   height: 100%;
-  overflow: auto;
+  overflow-y: scroll;
 }
 </style>

@@ -20,6 +20,9 @@ import elseSwitch from '@/components/common/elseSwitch'
 import vueModel from '@/components/common/vue_model'
 import algorithm from '@/components/common/algorithm'
 import sortTable from '@/components/common/Sortable'
+import wangeditor from '@/components/common/wangeditor'
+import wx from '@/components/common/wx'
+
 
 Vue.use(Router)
 
@@ -118,6 +121,16 @@ export default new Router({
       path: '/sortTable',
       name: 'sortTable',
       component: sortTable
+    },
+    {
+      path: '/wangeditor',
+      name: 'wangeditor',
+      component: wangeditor
+    },
+    {
+      path: '/wx',
+      name: 'wx',
+      component: wx
     }
   ]
 })

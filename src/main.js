@@ -16,6 +16,18 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './assets/css/common.css'
 
 
+var host = location.host;
+if(!(host.indexOf('test')>-1) && !(host.indexOf('localhost')>-1) ){
+    //线上环境或者beta环境
+    window.$action= new postdata({})
+}else{
+    //集成环境或者本地开发环境
+    window.$action= new postdata({
+        url:'http://open.test.jiehun.com.cn/user/sdk/post-web-data'  //集成接口
+    })
+}
+
+
 
 /* eslint-disable no-new */
 router.beforeEach((to,form,next)=>{
