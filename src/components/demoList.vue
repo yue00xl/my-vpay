@@ -87,6 +87,10 @@ export default {
           name:'a链接上绑定事件请求接口',
           url:'/wx'
         },
+        {
+          name:'前端缓存',
+          url:'/indexDB'
+        },
       ]
     }
   }
