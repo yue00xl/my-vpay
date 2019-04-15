@@ -7,24 +7,76 @@
         <div>
             <input type="text" id="input" placeholder="自己实现数据的双向绑定"/>
 
-            <div id="input_data"></div>
+            <div id="input_data">双向绑定的数据：{{ceshi_data}}</div>
         </div>
+
+        <button @click="action">事件上报</button>
     </div>
 </template>
 
 <script>
+var PENDING = 0; // 进行中
+var FULFILLED = 1; // 成功
+var REJECTED = 2; // 失败
 export default{
     data(){
         return{
-            arr:[1,2,3,4,5,10,2]
+            arr:[1,2,3,4,5,10,2],
+            ceshi_data:''
         }
     },
     mounted(){
         //console.log(this.isReact(this.arr));
-        this.test1()
+        //this.test1()
+        this.Promise_es(0,'callback').then((res)=>{
+            console.log(res)
+        })
+        this.Promise_res();
     },
     methods:{
+        action(){
+            var params = {
+                "actionName":"tab-333",
+                "actionValue":"https://m.jiehun.com.cn"
+            }
+            window.$action.h_actionDatas(params);
+        },
+        Promise_res(fn){
+            var state = PENDING;
+            var value = null;
+            var handlers = [];
+
+            //success
+            function fulfill(result){
+                state = FULFILLED;
+                value = result;
+                handlers.forEach(handle)
+                handlers = null;
+            }
+
+            function reject(error){
+                state = REJECTED;
+                value = error;
+                handlers.forEach(handle)
+                handlers = null;
+            }
+            
+
+        
+        },
+
+        Promise_es(status,text){
+            return new Promise((resolve,reject)=>{
+                if(status === 0){
+                    text = 'new_callback'
+                    resolve(text)
+                }else{
+                    reject('err')
+                }
+            })
+        },
         test1(){
+            var that = this;
             //自己实现数据双向绑定
             // const Input = document.getElementById('input')
             // const Input_data = document.getElementById('input_data')
@@ -38,14 +90,15 @@ export default{
             const Input = document.getElementById('input')
             Object.defineProperty(data,'text',{
                 set(value){
-                    //Input.value = value;
+                    Input.value = value;
                     this.value = value;
                 }
             })
 
             Input.addEventListener('input',function(e){
                 data.text = e.target.value;
-                console.log(data)
+                that.ceshi_data = e.target.value;
+            
             },false)
 
         },

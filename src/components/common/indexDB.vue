@@ -2,6 +2,9 @@
 <template>
     <div>
         <div id="container"></div>
+
+        <button @click="action">事件上报</button>
+        <a href="https://m.jiehun.com.cn/baike/">测试referer</a>
     </div>
 </template>
 
@@ -18,6 +21,13 @@ export default {
     },
     methods:{
         ...mapMutations(['HEADERTITLE']),
+        action(){
+            var params = {
+                "actionName":"tab",
+                "actionValue":"https://m.jiehun.com.cn"
+            }
+            window.$action.h_actionDatas(params);
+        },
         contains(){
             //1-load:3.56s;
             // for(let i=0;i<1000;i++){
@@ -85,3 +95,12 @@ export default {
     }
 }
 </script>
+
+
+<style scoped>
+button{
+    width: 100px;
+    height: 30px;
+    border: 1px solid #ccc;
+}
+</style>

@@ -20,6 +20,7 @@ export default {
     }
   },
   mounted(){
+    console.log('app==='+location.href)
     this.$store.commit('HEADERTITLE','首页');
     this.Header = this.$refs.defaultHeader.$refs.defaultHeader.clientHeight;
     this.routerHeight = window.innerHeight - this.Header;

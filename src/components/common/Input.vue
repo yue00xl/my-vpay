@@ -25,6 +25,9 @@ export default {
         scrollToEnd(){
             document.body.scrollTop = document.body.scrollHeight;
         }
+    },
+    mounted(){
+        console.log('input=='+location.href)
     }
 }
 </script>

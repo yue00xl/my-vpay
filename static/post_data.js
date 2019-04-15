@@ -37,6 +37,7 @@ function postdata(){
         'actionPosition':'',
         'actionId':this.generateUUID()
     };
+    //查询cookie
     this.getCookie = function(name){
         var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
         if(arr=document.cookie.match(reg)){
@@ -45,59 +46,32 @@ function postdata(){
             return null; 
         }
     };
-    this.setCookie = function(key,value,t,domain){
+    //设置cookie
+    this.setCookie = function(key,value,t,domain,path){
+        console.log(path || '/')
         //存cookie
         var oDate=new Date();
-        var path = '/';
-        var t = t ? this.eval(t) : 0;
+        t = this.eval(t);
+        domain = domain || '.jiehun.com.cn'
+        path = path || '/';
         oDate.setTime(oDate.getTime() + t);
         document.cookie=key+"="+encodeURIComponent(value)+";expires="+oDate.toGMTString()+";domain="+domain+";path="+path;
     };
+    //删除cookie
+    this.delCookie = function(name){
+        var oDate = new Date();     
+        oDate.setTime(oDate.getTime() - 1); 
+        var cval=this.getCookie(name); 
+        if(cval!=null){
+            document.cookie= name + "="+cval+";expires="+oDate.toGMTString(); 
+        }
+    };
+
     this.eval = function(str){
         var Fn = Function;  //一个变量指向Function，防止有些前端编译工具报错
-        return new Fn('return ' + str)();
+        return new Fn('return ' + 1000 * 60 * 60 * 24 * str)();
     };
-
-    //事件委托
-    this.delegateEvent = function(interfaceEle,selector,type,fn){
-        var that = this;
-        if(interfaceEle.addEventListener){
-            interfaceEle.addEventListener(type,eventfn);
-        }else{
-            interfaceEle.attachEvent("on"+type,eventfn);
-        }
-        function eventfn(e){
-            var e = e || window.event;
-            var target = e.target || e.srcElement;
-            that.isParentNode(target,selector,fn,e)
-        }
-    };
-    this.isParentNode = function(target,selector,fn,e){
-        var that = this;
-        if(that.matchSelector(target, selector)){
-            if(fn){
-                fn.call(target,e);
-            }
-        }else{
-            if(target.parentNode){
-                target = target.parentNode;
-                that.isParentNode(target,selector,fn,e);
-            }
-        }
-    };
-    //判断事件的作用目标是否与选择器匹配；匹配则返回true
-    this.matchSelector = function(ele, selector){
-        if(ele == null)return;
-        // 如果选择器为ID
-        if (selector.charAt(0) === "#") {            
-            return ele.id === selector.slice(1);   
-        }
-        //如果选择器为Class
-        if (selector.charAt(0) === ".") {
-            return (" " + ele.className + " ").indexOf(" " + selector.slice(1) + " ") != -1;
-        }
-    };
-
+    //兼容Object.assign属性
     this.Object_assign = function(init_data,new_data){
         var data = {};
         if (typeof Object.assign != 'function') {
@@ -125,24 +99,26 @@ function postdata(){
         }
         return data;
     };
-
+    //页面上报
     this.pageDatas = function(){
         this.params = this.Head(document.cookie);
         var params = this.dataListFun();
         this.postWebData(params) //页面上报
     };
-    this.init_data = function(){
-        this.pageDatas();  //页面上报
-        this.actionDatas();  //事件上报
-    };
     this._init();
 };
 
 postdata.prototype._init = function(){
+    /**
+    * 在cookie存一个pageId
+    */
+    this.delCookie('page-id');
+    this.params.pageId = this.generateUUID();
+    this.setCookie('page-id',this.params.pageId,'1',this.params.domain);
+
     this.pageDatas();  //页面上报
     this.actionDatas();  //事件上报
 };
-
 
 /**
  * 封装简易的ajax
@@ -292,21 +268,14 @@ postdata.prototype.Head = function(cookielist){
     */
     if(!this.params.jid || this.params.jid=='undefined'){
         this.params.jid =this.generateUUID().split("-").join("");
-        this.setCookie('jid',this.params.jid,'1000 * 60 * 60 * 24 * 365',this.params.domain);
-    }
-    /**
-    * 判断有没有pageId 如果没有的话生成并且保存在cookie中
-    */
-    if(!this.params.pageId){
-        this.params.pageId = this.generateUUID();
-        this.setCookie('page-id',this.params.pageId);
+        this.setCookie('jid',this.params.jid,'365',this.params.domain);
     }
     return this.params;  
 };
 
 /**
- * 数据上报body中所需要的数据
- */
+* 数据上报body中所需要的数据
+*/
 postdata.prototype.dataListFun = function(){
     var params = {
         "data":[{
@@ -329,36 +298,38 @@ postdata.prototype.dataListFun = function(){
 postdata.prototype.actionDatas = function(){
     var that = this;
     var pageData = that.dataListFun();
-    var current = window.document;
+    var current = document.querySelectorAll('.action_post_web_data');
     if(current){
-        this.delegateEvent(current,'.action_post_web_data','click',function(){
-            console.log('action_post_web_data')
-            var postData;
-            try{
-                //JSON格式正确
-                var action = this.getAttribute('data-action') ? this.getAttribute('data-action') : '{}';
-                var data = JSON.parse(action);
-                postData = that.Object_assign(that.actionlist,data);
-            }catch(err){
-                //JSON格式不正确，自己拼接
-                var tapParams = this.getAttribute('data-action').replace(/(^{)|(}$)/g, "").split(',');
-                var obj = {};
-                for(var i=0;i<tapParams.length;i++){
-                    var data_action = tapParams[i].replace(/\s+/g,"").replace(/:/,'^').split('^');
-                    data_action[0] = data_action[0].replace(/(^'|")|('|"$)/g, "");
-                    data_action[1] = data_action[1].replace(/(^'|")|('|"$)/g, "");
-                    obj[data_action[0]] = data_action[1];
+        for(var i=0;i<current.length;i++){
+            current[i].addEventListener('click',function(){
+                var postData;
+                try{
+                    //JSON格式正确
+                    var action = this.getAttribute('data-action') ? this.getAttribute('data-action') : '{}';
+                    var data = JSON.parse(action);
+                    postData = that.Object_assign(that.actionlist,data);
+                }catch(err){
+                    //JSON格式不正确，自己拼接
+                    var tapParams = this.getAttribute('data-action').replace(/(^{)|(}$)/g, "").split(',');
+                    var obj = {};
+                    for(var i=0;i<tapParams.length;i++){
+                        var data_action = tapParams[i].replace(/\s+/g,"").replace(/:/,'^').split('^');
+                        data_action[0] = data_action[0].replace(/(^'|")|('|"$)/g, "");
+                        data_action[1] = data_action[1].replace(/(^'|")|('|"$)/g, "");
+                        obj[data_action[0]] = data_action[1];
+                    }
+                    postData = that.Object_assign(that.actionlist,obj);
                 }
-                postData = that.Object_assign(that.actionlist,obj);
-            }
-            var list = that.Object_assign(pageData.data[0],postData);
-            var params = {
-                "data":[list]
-            };
-            that.postWebData(params); //事件上报
-        })
+                var list = that.Object_assign(pageData.data[0],postData);
+                var params = {
+                    "data":[list]
+                };
+                that.postWebData(params) //事件上报
+            },false);
+        }
     }
 };
+
 
 /**事件上报 -- 手动触发事件上报 */
 postdata.prototype.h_actionDatas = function(data){
@@ -379,11 +350,3 @@ postdata.prototype.h_actionDatas = function(data){
     };
     that.postWebData(params); //事件上报
 };
-
-
-
-
-
-
-
-

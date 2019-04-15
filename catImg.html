@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./cropper/dist/cropper.css">
+    <style>
+    .img-container{
+        width: 300px;
+        height: 300px;
+        border: 1px solid #ccc;
+    }
+    .img-container img{
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .img-preview{
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+    }
+    .docs-buttons{
+        margin: 20px 0;
+        overflow: hidden;
+    }
+    .docs-buttons span{
+        cursor: pointer;
+        float: left;
+        width: 50px;
+        height: 30px;
+    }
+    .upload-image,.submit {
+        position: relative;
+        display: inline-block;
+        background: #D0EEFF;
+        border: 1px solid #99D3F5;
+        border-radius: 4px;
+        padding: 4px 12px;
+        overflow: hidden;
+        color: #1E88C7;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+    .upload-image input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+    </style>
+</head>
+<body>
+    <div><img src="https://img.tthunbohui.cn/dmp/h/old/1551974400/jh-img-orig-ga_1103913986779095040_80_80_2827.jpg" alt=""></div>
+    <div class="img-container">
+        <img id="image" src="https://img.tthunbohui.cn/dmp/h/old/1551974400/jh-img-orig-ga_1103913986779095040_80_80_2827.jpg" alt="" />
+    </div>
+    <div class="upload-image">
+        <input type="file" id="inputImage" name="file" accept=".jpg,.jpeg,.png">
+        <span>上传新图片</span>
+    </div>
+    <div class="docs-buttons">
+        <span data-method="zoom" data-option="-0.1">缩放</span>
+        <span data-method="zoom" data-option="0.1">放大</span>
+        <span data-method="rotate" data-option="90">旋转</span>
+    </div>
+    <div class="img-preview"></div>
+    <div class="submit">
+        <span>确定</span>
+    </div>
+
+    <script src="./cropper/dist/jquery.1-11.min.js"></script>
+    <script src="./cropper/dist/cropper.js"></script>
+    <script>
+        $(function(){
+            var URL = window.URL || window.webkitURL;
+
+            var $image = $('#image');
+            var $inputImage = $('#inputImage');
+            //获取图片截取的位置
+            var $dataX = $('#dataX');
+            var $dataY = $('#dataY');
+            var $dataHeight = $('#dataHeight');
+            var $dataWidth = $('#dataWidth');
+            var $dataRotate = $('#dataRotate');
+            var $dataScaleX = $('#dataScaleX');
+            var $dataScaleY = $('#dataScaleY');
+
+            var options = {
+                aspectRatio: 1 / 1, //裁剪框比例1:1
+                preview: '.img-preview',
+                crop: function (e) {
+                    $dataX.val(Math.round(e.x));
+                    $dataY.val(Math.round(e.y));
+                    $dataHeight.val(Math.round(e.height));
+                    $dataWidth.val(Math.round(e.width));
+                    $dataRotate.val(e.rotate);
+                    $dataScaleX.val(e.scaleX);
+                    $dataScaleY.val(e.scaleY);
+                }
+            };
+            var originalImageURL = $image.attr('src');
+            var uploadedImageURL;
+
+            // Cropper
+            $image.on({
+                ready: function (e) {
+                    console.log(e.type);
+                },
+                cropstart: function (e) {
+                    //console.log(e.type, e.action);
+                },
+                cropmove: function (e) {
+                    //console.log(e.type, e.action);
+                },
+                cropend: function (e) {
+                    //console.log(e.type, e.action);
+                },
+                crop: function (e) {
+                    // console.log(e.type, e.x, e.y, e.width, e.height, e.rotate, e.scaleX, e.scaleY);
+                },
+                zoom: function (e) {
+                    //console.log(e.type, e.ratio);
+                }
+            }).cropper(options);
+
+
+            $('.docs-buttons').on('click','span',function(e){
+                var $this = $(this);
+                var data = $this.data();
+                switch(data.method){
+                    case 'zoom':
+                        $image.cropper('zoom',data.option)
+                        break;
+                    case 'rotate':
+                        $image.cropper('rotate',data.option)
+                        break;
+                    default:
+                        console.log('default')
+                }
+            })
+
+            $inputImage.change(function(){
+                var files = this.files;
+                var file;
+                if(files && files.length){
+                    file = files[0];
+                    console.log(file)
+                    if (/^image\/\w+$/.test(file.type)) {
+                        if (uploadedImageURL) {
+                            URL.revokeObjectURL(uploadedImageURL);
+                        }
+                        uploadedImageURL = URL.createObjectURL(file);
+                        $image.cropper('destroy').attr('src', uploadedImageURL).cropper(options);
+                        $inputImage.val('');
+                    } else {
+                        window.alert('Please choose an image file.');
+                    }
+                }
+            })
+            
+            $('.submit').on('click',function(){
+                var result = $image.cropper('getCroppedCanvas',{
+                    minWidth: 80,
+                    minHeight: 80
+                });
+                
+                var imgBase=result.toDataURL('image/jpeg');
+                var upload_result = dataURLtoFile(imgBase)
+
+                var formData = new FormData();
+                formData.append('bizcode', '102')
+			    formData.append('file', upload_result)
+                console.log(upload_result)
+                console.log(formData)
+                
+                $.post('upload_img.php',{
+                    data:formData
+                },function(result){
+                    console.log(result)
+                })
+
+            })
+
+            function dataURLtoFile(dataurl){
+                var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+                    bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+                while(n--){
+                    u8arr[n] = bstr.charCodeAt(n);
+                }
+                var filename = new Date().getTime() + '.png';
+                return new File([u8arr], filename,{type:mime});
+            }
+
+
+        })
+
+
+
+    </script>
+</body>
+</html>

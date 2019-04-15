@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./static/jquery.1-11.min.js"></script>
+    <script src="./static/jquery.lazyload.js"></script>
+    
+    <script>
+      $(function() {
+          $("img.lazy").lazyload({effect: "fadeIn"});
+          $('.btn').on('click',function(){
+              document.querySelector('body').innerHTML += '<div>2222</div>'
+               // $('body').html('<div>sdfsf</div>')
+            })
+      });
+     
+    </script>
+    <style>
+        .lazyload img{
+            width: 100%;
+            height: 400px;
+        }
+        .btn{
+            width: 200px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="btn">
+        阻塞懒加载的按钮
+    </div>
+    <div class="lazyload">
+        <img class="lazy" data-original="https://img.tthunbohui.cn/dmp/h/cms/1555257600/jh-img-orig-ga_1117609603967590400_1000_500_134761.jpg@!670c335"  alt="">
+        <img class="lazy" data-original="https://img.tthunbohui.cn/dmp/h/cms/1554739200/jh-img-orig-ga_1115432040402886656_650_488_117807.jpg@!330w" alt="">
+        <img class="lazy" data-original="https://img.tthunbohui.cn/dmp/h/cms/1554998400/jh-img-orig-ga_1116537522999894016_650_488_243027.jpg@!330w"  alt="">
+        <img class="lazy" data-original="https://img.tthunbohui.cn/dmp/h/cms/1554393600/jh-img-orig-ga_1113989505319018496_325_235_63224.jpg@!330w" alt="">
+        <img class="lazy" data-original="https://img.tthunbohui.cn/dmp/h/cms/1554912000/jh-img-orig-ga_1116234905258139648_325_235_53984.jpg@!330w" alt="">
+        <img class="lazy" data-original="https://img.tthunbohui.cn/dmp/h/cms/1554739200/jh-img-orig-ga_1115432898977210368_325_235_22117.jpg@!330w"  alt="">
+        <img class="lazy" data-original="https://img.tthunbohui.cn/dmp/h/cms/1554393600/jh-img-orig-ga_1113994306698485760_800_400_138292.jpg@!670w" alt="">
+        <img class="lazy" data-original="https://img.tthunbohui.cn/dmp/h/cms/1554912000/jh-img-orig-ga_1116235969974116352_800_400_140060.jpg@!670w" alt="">
+    </div>
+</body>
+</html>
