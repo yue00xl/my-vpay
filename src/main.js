@@ -16,35 +16,32 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './assets/css/common.css'
 
 
-// var host = location.host;
-// if(!(host.indexOf('test')>-1) && !(host.indexOf('localhost')>-1) ){
-//     //线上环境或者beta环境
-//     window.$action= new postdata({})
-// }else{
-//     //集成环境或者本地开发环境
-//     window.$action= new postdata({
-//         url:'http://open.test.jiehun.com.cn/user/sdk/post-web-data',
-//         domain:'localhost'
-//     })
-// }
-
-
-
 /* eslint-disable no-new */
 router.beforeEach((to,form,next)=>{
-  console.log('main==='+ location.href)
-  window.$action= new postdata({
-      url:'http://open.test.jiehun.com.cn/user/sdk/post-web-data',
-      domain:'localhost'
-  })
-  // console.log(to);
-  // console.log(form);
   let isLogin = localStorage.getItem('token') ? localStorage.getItem('token') : false
   if(isLogin || to.name == 'Login'){
     next();
   }else{
     next({path:'/login'})
   }
+
+
+  // console.log(window.location.href)
+  // console.log('init======',window.pageNameid)
+  // if(window.pageNameid){
+  //   window.pageNameid = {};
+  // }
+  // window.pageNameid = {
+  //   pagename_id :  '123'
+  // }
+  // console.log('mounted=======',window.pageNameid)
+  
+  window.sessionStorage.setItem(window.location.href,'pagename_id123')
+
+  window.$action= new postdata({
+      url:'http://open.test.jiehun.com.cn/user/sdk/post-web-data',
+      domain:'localhost',
+  })
 })
 
 new Vue({

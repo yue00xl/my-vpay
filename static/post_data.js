@@ -1,10 +1,11 @@
 'use strict';
 //数据上报
+;(function(win,doc){
 function postdata(){
     //初始化cookie中的参数
     this.params = {
         authorization : '',  //用户登录信息
-        city_id : 0,  //城市ID
+        city_id : arguments[0].city_id || 0,  //城市ID
         app_key : 'hunbasha_wap',   //APP标识
         jid:'',  //浏览器id
         app_channel:'', //安装(升级)渠道
@@ -48,11 +49,10 @@ function postdata(){
     };
     //设置cookie
     this.setCookie = function(key,value,t,domain,path){
-        console.log(path || '/')
         //存cookie
         var oDate=new Date();
         t = this.eval(t);
-        domain = domain || '.jiehun.com.cn'
+        domain = domain || '.jiehun.com.cn';
         path = path || '/';
         oDate.setTime(oDate.getTime() + t);
         document.cookie=key+"="+encodeURIComponent(value)+";expires="+oDate.toGMTString()+";domain="+domain+";path="+path;
@@ -66,7 +66,7 @@ function postdata(){
             document.cookie= name + "="+cval+";expires="+oDate.toGMTString(); 
         }
     };
-
+    
     this.eval = function(str){
         var Fn = Function;  //一个变量指向Function，防止有些前端编译工具报错
         return new Fn('return ' + 1000 * 60 * 60 * 24 * str)();
@@ -201,6 +201,27 @@ postdata.prototype.postWebData = function(params){
  *  将cookie中的各种参数取出来
  */
 postdata.prototype.Head = function(cookielist){
+    //执行city-id的获取
+    /**
+     * if(Session Storage 中是否存在 city-id){
+     *    //TODO 返回session 中city-id
+     * }else if(cookit 中是否存在 citd-id){
+     *    //TODO 返回cookie  中city-id
+     * }else{
+     *    //TODO 返回 city-id = 0
+     * }
+     * this.params.city_id = value;
+     */
+    var session_cityid = window.sessionStorage.getItem('city-id');
+    var cookie_cityid = this.getCookie('city-id'); 
+    if(session_cityid){
+        this.params.city_id = session_cityid;
+    }else if(cookie_cityid){
+        this.params.city_id = cookie_cityid;
+    }else{
+        this.params.city_id = 0;
+    }
+    
     if(cookielist) {
         var cookieArr = cookielist.split(';');
         for (var i in cookieArr) {
@@ -221,14 +242,11 @@ postdata.prototype.Head = function(cookielist){
                 case 'jhu':
                     if(value){
                         if(/^dmp/.test(value)){
-                            this.params.authorization = value
+                            this.params.authorization = value;
                         }else{
                             this.params.authorization = 'dmp ' + value
                         }    
                     };         
-                    break;
-                case 'city-id':
-                    this.params.city_id = value;
                     break;
                 case 'app-key':
                     this.params.app_key = value;
@@ -350,3 +368,5 @@ postdata.prototype.h_actionDatas = function(data){
     };
     that.postWebData(params); //事件上报
 };
+win.postdata = postdata;
+})(window,document)

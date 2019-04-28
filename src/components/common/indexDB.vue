@@ -13,9 +13,10 @@
 import {mapMutations} from 'vuex'
 export default {
     created(){
-        this.HEADERTITLE('前端缓存');
+        this.HEADERTITLE('数据上报');
     },
     mounted(){
+        //console.log(window.location.href)
         //this.newBuild()
         //this.contains();
     },

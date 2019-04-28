@@ -88,7 +88,7 @@ export default {
           url:'/wx'
         },
         {
-          name:'前端缓存',
+          name:'数据上报',
           url:'/indexDB'
         },
       ]
