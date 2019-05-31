@@ -6,17 +6,19 @@ function postdata(){
     this.params = {
         authorization : '',  //用户登录信息
         city_id : arguments[0].city_id || 0,  //城市ID
-        app_key : 'hunbasha_wap',   //APP标识
+        app_key : arguments[0].app_key || 'hunbasha_wap',   //APP标识
         jid:'',  //浏览器id
-        app_channel:'', //安装(升级)渠道
-        app_version:'',  //APP版本号
+        app_channel: arguments[0].app_channel || '', //安装(升级)渠道
+        app_version: arguments[0].app_version || '',  //APP版本号
         pageId:'',  //页面浏览id
+        pageid_type:arguments[0].pageid_type || false, //pageid的获取方式 如果为true，优先从cookie中获取，反之生成一个pageid并存入cookie中
         device_id:'',  //设备标示符
         view_id:'',  //打开APP生成的id
         lat : '',  //纬度
         lng : '',   //经度
         url:arguments[0].url || '//open.jiehun.com.cn/user/sdk/post-web-data',
-        domain:arguments[0].domain || '.jiehun.com.cn'
+        domain:arguments[0].domain || '.jiehun.com.cn',
+        scm_data:arguments[0].scm_data || null, //活动监控id
     };
     //生成一个随机的uuid值
     this.generateUUID = function(){
@@ -109,13 +111,19 @@ function postdata(){
 };
 
 postdata.prototype._init = function(){
-    /**
-    * 在cookie存一个pageId
-    */
-    this.delCookie('page-id');
-    this.params.pageId = this.generateUUID();
-    this.setCookie('page-id',this.params.pageId,'1',this.params.domain);
-
+    if(this.params.pageid_type){
+        if(this.getCookie('page-id')){
+            this.params.pageId = this.getCookie('page-id');
+        }else{
+            this.params.pageId = this.generateUUID();
+            this.setCookie('page-id',this.params.pageId,'1',this.params.domain);
+        }
+    }else{
+        this.delCookie('page-id');
+        this.params.pageId = this.generateUUID();
+        this.setCookie('page-id',this.params.pageId,'1',this.params.domain);
+    }
+    
     this.pageDatas();  //页面上报
     this.actionDatas();  //事件上报
 };
@@ -172,6 +180,23 @@ postdata.prototype.createxmlHttpRequest = function(){
     }  
 };
 
+postdata.prototype.changeparam = function(href,name,value){
+    var url= href;
+    var newUrl= "";
+    var reg = new RegExp("(^|)"+ name +"=([^&]*)(|$)");
+    var tmp = name + "=" + value;
+    if(url.match(reg) != null){
+        newUrl= url.replace(eval(reg),tmp);
+    }else{
+        if(url.match("[\?]")){
+            newUrl= url + "&" + tmp;
+        }else{
+            newUrl= url + "?" + tmp;
+        }
+    }
+    return newUrl;
+};
+
 postdata.prototype.postWebData = function(params){
     this.$Ajax({ 
         type:"post", 
@@ -190,7 +215,7 @@ postdata.prototype.postWebData = function(params){
             "page-id":this.params.pageId,
         },
         success:function(msg){ 
-            //console.log(msg) 
+            console.log(msg) 
         }, 
         error:function(){ 
             //console.log("error") 
@@ -221,7 +246,15 @@ postdata.prototype.Head = function(cookielist){
     }else{
         this.params.city_id = 0;
     }
-    
+
+    //活动监控 scm_data
+    var scm_data = window.sessionStorage.getItem('scm_data')
+    if(scm_data && scm_data !== '[object Object]'){
+        this.params.scm_data = JSON.parse(scm_data);
+        window.sessionStorage.removeItem('scm_data');
+    }else{
+        this.params.scm_data = null;
+    }
     if(cookielist) {
         var cookieArr = cookielist.split(';');
         for (var i in cookieArr) {
@@ -295,11 +328,18 @@ postdata.prototype.Head = function(cookielist){
 * 数据上报body中所需要的数据
 */
 postdata.prototype.dataListFun = function(){
+    var pageName = window.location.href;
+    if(this.params.scm_data){
+        var scm = this.params.scm_data;
+        for(var key in scm){
+            pageName = this.changeparam(pageName,key,scm[key]);
+        }
+    };
     var params = {
         "data":[{
             visitCityName: "", // 定位城市name,通过IP地址获取
             cityId: parseInt(this.params.city_id) || 0,
-            pageName: location.href,
+            pageName: pageName,
             pageTitle: document.title ? document.title : '',
             viewId: this.params.view_id || "", // 当在APP中打开WAP时，需要上报；普通浏览器中为空 "" 
             authorization:this.params.authorization || "",

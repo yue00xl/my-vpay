@@ -25,6 +25,12 @@ export default{
             ceshi_data:''
         }
     },
+    created() {
+        var scm_data = {
+            'scm':'456'
+        }
+        window.sessionStorage.setItem('scm_data',JSON.stringify(scm_data))
+    },
     mounted(){
         //console.log(this.isReact(this.arr));
         //this.test1()
@@ -35,6 +41,7 @@ export default{
     },
     methods:{
         action(){
+            console.log(11)
             var params = {
                 "actionName":"tab-333",
                 "actionValue":"https://m.jiehun.com.cn"

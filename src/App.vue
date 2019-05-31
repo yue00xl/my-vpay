@@ -19,6 +19,17 @@ export default {
       routerHeight:''
     }
   },
+  watch: {
+    $route (to, from) {
+      // 对路由变化作出响应...
+      this.$nextTick(()=>{
+        window.$action._init();
+      })
+    }
+  },
+  created(){
+    this.postdata();
+  },
   mounted(){
     this.$store.commit('HEADERTITLE','首页');
     this.Header = this.$refs.defaultHeader.$refs.defaultHeader.clientHeight;
@@ -30,7 +41,13 @@ export default {
     ...mapState(['headersTitle'])
   },
   methods:{
-    
+    postdata(){
+      window.$action= new postdata({
+          url:'http://open.test.jiehun.com.cn/user/sdk/post-web-data',
+          domain:'localhost',
+          pageid_type:true
+      })
+    }
   }
 }
 </script>

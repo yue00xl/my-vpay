@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="hf-mobile-750">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,46 +7,917 @@
     <meta name="referrer" content="never">
     <title>Document</title>
     <script src="./static/jquery.1-11.min.js"></script>
-    <script src="./static/jquery.lazyload.js"></script>
-    
+    <link rel="stylesheet" href="https://cdn.bootcss.com/fullPage.js/2.4.9/jquery.fullPage.min.css">
+    <script src="https://cdn.bootcss.com/fullPage.js/2.4.9/jquery.fullPage.min.js"></script>
     <script>
-      $(function() {
-        //   setTimeout(function(){
-        //     var src = $('.andriod').attr('data-hbh');
-        //     $('.andriod').attr('src',src)
-        //   },1000)
-        $('img.lazy').lazyload({effect: "fadeIn"});
-      });
-     
-    
+    !function($,doc,win){var html=$("html"),enableMobile=html.hasClass("hf-mobile"),enableMobile2=html.hasClass("hf-mobile-750");if(enableMobile||enableMobile2){var lastWidth,deviceWidth,defaults={baseFontSize:40,maxWidth:640,minWidth:190},dataset=html.data(),conf={};for(var key in enableMobile2&&(defaults={baseFontSize:50,maxWidth:750,minWidth:190}),defaults)defaults.hasOwnProperty(key)&&(conf[key]=defaults[key]);for(var key in dataset)key in defaults&&(conf[key]=dataset[key]);function resizeRem(){var curWidth=0;!deviceWidth&&window.aji&&window.aji.getDeviceWidth&&(deviceWidth=window.aji.getDeviceWidth()),(curWidth=deviceWidth?deviceWidth/window.devicePixelRatio:Math.min(screen.availWidth,doc.documentElement.clientWidth))&&curWidth!=lastWidth&&(curWidth>conf.maxWidth?html.css("fontSize",conf.baseFontSize):curWidth<conf.minWidth?html.css("fontSize",conf.minWidth/conf.maxWidth*conf.baseFontSize):html.css("fontSize",curWidth/conf.maxWidth*conf.baseFontSize),lastWidth=curWidth)}$(window).bind("resize",resizeRem),$(function(){(enableMobile||enableMobile2)&&$(doc.body).css({width:conf.maxWidth/conf.baseFontSize+"rem",marginLeft:"auto",marginRight:"auto",position:"relative"})}),(enableMobile||enableMobile2)&&($(doc.body).css({width:defaults.maxWidth/defaults.baseFontSize+"rem",marginLeft:"auto",marginRight:"auto",position:"relative"}),resizeRem())}}(jQuery,document,window);
+    </script>
+    <script>
+
+/**
+ * 图片延迟加载组件
+ * version 1.0.0
+ * delay 延时多少毫秒加载
+ * failure_limit  距离顶部多少开始加载图片
+ */
+
+!(function($){
+    $.fn.lazyload = function(option){
+        var defaults = {
+            delay:30,
+            pics:0,
+            failure_limit:200,
+            placeholder:"data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        }
+        var options = $.extend(defaults,option);
+        this.each(function(){
+            $(function(){
+                var delay = options['delay'];
+                var loadIndex = options['pics'];
+                // 暂时只做这个选择
+                var imgs = document.querySelectorAll('img[data-hbh]');
+
+                // 设定了首次加载个数
+                if(loadIndex){
+                    imgs.forEach(function(item,index){
+                        if(index <= loadIndex-1){
+                            item.src = item.getAttribute('data-hbh');
+                        }
+                    });
+                }else{
+                    // 激活图片平铺迭代器
+                    loadFirstScreen(imgs,loadIndex);
+                }
+                window.addEventListener("scroll",_debounce(function(){
+                    console.log('11')
+                    imgs.forEach(function(item,index){
+                        var src = item.src;
+                        if(src && src.match(/(data:image\/gif)/g)){
+                            var status = isInViewPortOfOne(item);
+                            if(status){
+                                item.src = item.getAttribute('data-hbh');
+                            }
+                        }
+                    });
+                },delay));
+            })
+        });
+        /**
+         * 迭代加载第一屏所有图片，可以考虑使用Worker预加载
+         */
+        $.fn.pullpageImg = function(){
+            console.log('pullpageImg')
+            var delay = options['delay'];
+            var loadIndex = options['pics'];
+            // 暂时只做这个选择
+            var imgs = document.querySelectorAll('img[data-hbh]');
+            // 设定了首次加载个数
+            if(loadIndex){
+                imgs.forEach(function(item,index){
+                    if(index <= loadIndex-1){
+                        item.src = item.getAttribute('data-hbh');
+                    }
+                });
+            }else{
+                // 激活图片平铺迭代器
+                loadFirstScreen(imgs,loadIndex);
+            }
+        };
+        function loadFirstScreen(imgs,index){
+            if(index >= imgs.length){ return;}
+            var img = new Image();
+            img.src = imgs[index].getAttribute('data-hbh');
+            img.addEventListener("load",function(){
+                imgs[index].src = this.src;
+                var status = isInViewPortOfOne(imgs[index]);
+                if(status){
+                    //继续迭代加载图片，直到第一屏铺满
+                    index = index + 1;
+                    loadFirstScreen(imgs,index);
+                }
+            });
+            img.addEventListener("error",function(){
+                imgs[index].src = options.placeholder;
+                var status = isInViewPortOfOne(imgs[index]);
+                if(status){
+                    //继续迭代加载图片，直到第一屏铺满
+                    index = index + 1;
+                    loadFirstScreen(imgs,index);
+                }
+            });
+        }
+        /**
+         * 检测距离顶部的位置
+         */
+        function isInViewPortOfOne (el) {
+            var viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+            var top = el.getBoundingClientRect() && el.getBoundingClientRect().top
+            return top  <= viewPortHeight + options.failure_limit
+        }
+        /**
+         * 防抖处理
+         */
+        function _debounce(func,wait){
+            var timeout, args, context, timestamp;
+            var later = function(){
+                var last = Date.now()-timestamp;
+                if(last < wait && last > 0){
+                    timeout = setTimeout(later, wait - last);
+                }else{
+                    timeout = null;
+                    func.apply(context, args);
+                    if (!timeout) context = args = null;
+                }
+            }
+            return function(){
+                context = this;
+                args = arguments;
+                timestamp = Date.now();
+                // 如果延时不存在，重新设定延时
+                if(!timeout){ timeout = setTimeout(later,wait)};
+            }
+        }
+        return this;
+    };
+})(window.jQuery)
+$(window).lazyload();
     </script>
     <style>
-        .lazyload img{
-            width: 100%;
-            height: 400px;
-        }
-        .btn{
-            width: 200px;
-            height: 50px;
-            text-align: center;
-            line-height: 50px;
-            border: 1px solid #000;
-        }
+* {
+    padding: 0;
+    margin: 0;
+    touch-action: none;
+}
+b{display:inline-block;}
+ul li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+}
+
+body {
+    font-family: '微软雅黑';
+    
+}
+img {
+    display: block;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.fixclear::after {
+    content: '';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.wrap {
+    width: 100%;
+    max-width: 15rem;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.hq_absol {
+    position: absolute;
+}
+
+.section {
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+/*1*/
+.section{background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap8.jpg);-webkit-background-size: 100% 100%;
+    background-size: 100% 100%;overflow:hidden;}
+.setion1{background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap1.jpg);-webkit-background-size: 100% 100%;
+    background-size: 100% 100%;overflow:hidden;}
+.section0 {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: absolute;
+    top: 0;
+    z-index: 1000000;
+}
+
+.section0 img {
+    width: 8rem;
+    height: 6rem;
+    margin: 6rem auto 0;
+}
+
+.section0 p {
+    font-size: 0.8rem;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.5rem;
+}
+.wap2{width:8.24rem;height:2.46rem;position: absolute;top:0rem;left:3.2rem;z-index: 1;opacity:0;}
+.wap3{width:13.14rem;height:7.56rem;position: absolute;top:-10rem;left:0.9rem;}
+.wap4{width:8.56rem;height:3.48rem;position: absolute;top:4rem;left:3.2rem;opacity:0;}
+.wap5{width:0.08rem;height:0;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap5.png) no-repeat;background-size: cover;position: absolute;top:9rem;left:7.5rem;}
+.wap6{width:7.04rem;height:7.04rem;position: absolute;top:10.6rem;left:4rem;opacity:0;}
+.wap7{width:9.36rem;height:2.34rem;position: absolute;top:100%;left:50%;margin-left: -4.68rem;opacity:0;}
+.wap9{width:8.1rem;height:1.38rem;position: absolute;top:2.5rem;left:-10rem;margin-left: -4.05rem;}
+.wap13{width:13.7rem;height:6.48rem;position: absolute;top:1.5rem;left:50%;margin-left: -6.85rem;opacity:0;}
+.wap10{width:1.14rem;height:1.24rem;position: absolute;top:-10rem;left:9.8rem;}
+.wap11{width:12.12rem;height:0.94rem;position: absolute;top:4.2rem;left:50%;margin-left: -6.06rem;opacity:0;}
+.wap12{width:0.72rem;height:0;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap12.png) no-repeat;background-size: cover;position: absolute;top:5.2rem;left:50%;margin-left:-0.351rem;}
+.wap14{width:13.02rem;height:9.94rem;position: absolute;top:6.8rem;left:50%;margin-left: -6.501rem;opacity:0;}
+.wap15{width:4.0rem;height:5.86rem;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap15.png) no-repeat;background-size: cover;position: absolute;top:8rem;left:-10rem;}
+.wap15 img{width:1.66rem;height:2.82rem;margin-left: 1.2rem;margin-top: 1.5rem;}
+.wap16{width:2.82rem;height:5.62rem;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap16.png) no-repeat;background-size: cover;position: absolute;top:8.2rem;right:-10rem;}
+.wap18{width:1.6rem;margin-top:1.8rem;margin-left:0.5rem;height:0.78rem;}
+.wap19{width:1.1rem;margin-top:1.5rem;margin-left:0.5rem;height:0.78rem;}
+.wap20{width:3.56rem;height:1.64rem;position: absolute;top:8rem;right:3rem;opacity:0;}
+.wap21{width:4.46rem;height:0.98rem;position: absolute;top:13rem;right:3rem;opacity:0;}
+.wap22{width:6.14rem;height:1.74rem;position: absolute;top:18rem;left:0.8rem;display:block;opacity:0;}
+.wap22 img{width:100%;}
+.wap23{width:6.94rem;height:1.74rem;top:18rem;right:0.8rem;position: absolute;opacity:0;}
+.wap23 img{width:100%;}
+.wap24{width:13.9rem;height:5.3rem;position: absolute;top:1.5rem;left:50%;margin-left: -6.95rem;opacity:0;}
+.wap25, .wap34{width:9.34rem;height:1.36rem;position: absolute;top:3.2rem;left:-10rem;margin-left: -4.67rem;}
+.wap34{top:15rem;left: -10rem;}
+.wap26, .wap26_2{width:1.14rem;height:1.24rem;position: absolute;top:-10rem;right:2.8rem;}
+.wap26_2{top:-10rem;right: 3.2rem;}
+.wap27{width:7.36rem;height:0;position: absolute;top:5rem;left:50%;margin-left: -3.68rem;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap27.png) no-repeat;background-size: cover;}
+.wap28{width:13.44rem;height:7.08rem;position: absolute;top:6.3rem;left:50%;margin-left: -6.72rem;opacity:0;}
+.wap29{width:4.66rem;height:2.92rem;position: absolute;top:7.4rem;left:-10rem;}
+.wap30{width:6.28rem;height:3.58rem;position: absolute;top:7.4rem;right:-10rem;}
+.wap31{width:0;height:0.56rem;position: absolute;top:11.4rem;left:50%;margin-left: -5.46rem;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap31.png) no-repeat;background-size: cover;}
+.wap32{display:block;width:4.92rem;height:1.4rem;position: absolute;top:12.5rem;left:1.2rem;opacity:0;}
+.wap32 img{width:100%;}
+.wap33{display:block;width:7.34rem;height:1.4rem;position: absolute;top:12.5rem;right:1.2rem;opacity:0;}
+.wap33 img{width:100%;}
+.wap35{width:3.96rem;height:2.98rem;position: absolute;top:17.5rem;left:3rem;opacity:0;}
+.wap36{width:3.88rem;height:3.0rem;position: absolute;top:17.5rem;right:3.2rem;opacity:0;}
+.wap37{width:0.6rem;height:0.6rem;position: absolute;top:17.3rem;right:3rem;opacity:0;}
+.setion4{background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap38.jpg);-webkit-background-size: 100% 100%;
+    background-size: 100% 100%;overflow:hidden;}
+.wap39{width:12.78rem;height:17.24rem;position: absolute;top:2rem;left:50%;margin-left: -6.39rem;opacity:0;}
+.wap40{width:13.76rem;height:5.96rem;position: absolute;top:3rem;left:50%;margin-left: -6.88rem;opacity:0;}
+.wap41{width:0rem;height:3.34rem;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap41.png) no-repeat;background-size: cover;position: absolute;top:4.5rem;left:1.7rem;}
+.wap42{width:3.2rem;height:3.2rem;position: absolute;top:4.5rem;right:1.5rem;opacity:0;}
+.wap43{width:10.04rem;height:1.18rem;position: absolute;left:-10rem;top:10.5rem;margin-left: -5.02rem;}
+.wap44{width:0.42rem;height:0.62rem;position: absolute;top:10.5rem;right:2.8rem;opacity:0;}
+.saclA{animation:sacl 2s infinite;}
+.wap45{width:11.38rem;height:0rem;position: absolute;top:12.5rem;left:50%;margin-left: -5.9rem;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap45.png) no-repeat;background-size: cover;}
+.wap47{width:13.2rem;height:5.96rem;position: absolute;top:6.8rem;left:50%;margin-left: -6.8rem;opacity:0;}
+.wap48{width:13.44rem;height:7.54rem;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap48.png) no-repeat;background-size: cover;margin:2rem auto 0;position: relative;z-index: 2;opacity:0;}
+.wap49{width:9.2rem;height:1.18rem;position: absolute;top:1.5rem;left:50%;margin-left: -4.6rem;opacity:0;}
+.wap54{width:0;height:0.92rem;position: absolute;top:5rem;left:50%;margin-left: -5.84rem;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap54.png) no-repeat;background-size: cover;}
+.wap50{width:8.74rem;height:0;position: absolute;bottom:2.7rem;left:50%;margin-left: -4.37rem;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap50.png) no-repeat;background-size: cover;}
+.wap51{width:2.1rem;height:1.16rem;position: absolute;top:3.8rem;left:3.5rem;opacity:0;}
+.wap52{width:2.06rem;height:1.16rem;position: absolute;top:3.8rem;left:7.2rem;opacity:0;}
+.wap53{width:2.02rem;height:1.16rem;position: absolute;top:3.8rem;left:11.1rem;opacity:0;}
+.wap55{display:block;width:9.52rem;height:1.4rem;position: absolute;top:8.8rem;left:50%;margin-left:-4.76rem;opacity:0;z-index: 2;}
+.wap55 img{width:100%;}
+.wap56{width:13.54rem;height:7.36rem;position: absolute;top:11.5rem;right:-10rem;margin-right: -6.77rem;}
+.wap57{width:4.26rem;height:2.66rem;position: absolute;top:13.5rem;left:2.5rem;opacity:0;}
+.wap58{width:5.46rem;height:5.06rem;position: absolute;top:12.3rem;right:1.5rem;opacity:0;}
+.wap59{width:1.0rem;height:0.44rem;position: absolute;top: 13.3rem;right: 3.2rem;opacity:0;}
+.wap60{width:1.0rem;height:0.76rem;position: absolute;top: 13.4rem;right: 4.6rem;opacity:0;}
+.wap61{width:0.66rem;height:0.94rem;position: absolute;top: 14.8rem;right: 2.5rem;opacity:0;}
+.wap62{width:0.94rem;height:0.84rem;position: absolute;top: 15.6rem;right: 4.7rem;opacity:0;}
+.wap63{width:0.94rem;height:0.72rem;position: absolute;top: 15.2rem;right: 4.4rem;opacity:0;}
+.wap64{width:9.52rem;height:1.4rem;display:block;position: absolute;top:18rem;left:50%;margin-left: -4.76rem;opacity:0;}
+.wap64 img{width:100%;}
+.setion6{background: url(https://img.tthunbohui.cn/zhuanti/1023554/wap38.jpg);
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    overflow: hidden;}
+.wap65{width:12.68rem;height:3.16rem;position: absolute;top:8rem;left:50%;margin-left: -6.34rem;opacity:0;}
+.wap66{width:13.16rem;height:6.96rem;position: absolute;top:2rem;left:50%;margin-left: -6.58rem;opacity:0;}
+.wap67{width:7.86rem;height:1.18rem;position: absolute;top:3rem;left:-10rem;margin-left: -3.93rem;}
+.wap68, .wap72{width:0.42rem;height:0.62rem;position: absolute;top:3rem;right:4rem;opacity:0;}
+.wap69{width:8.82rem;height:0rem;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap68g.png) no-repeat;background-size: cover;position: absolute;top:4.7rem;left:50%;margin-left: -4.41rem;overflow:hidden;}
+.wap69 a{display: block;
+width: 9rem;
+height: 1rem;
+margin-bottom: 0.26rem;}
+.wap70{width:13.16rem;height:9.76rem;position: absolute;top:10rem;left:50%;margin-left: -6.58rem;opacity:0;}
+.wap71{width:10.04rem;height:1.18rem;position: absolute;top:11rem;right:-10rem;margin-right: -5.02rem;}
+.wap72{top:11rem;right:2.4rem;}
+.wapjd{width:2.14rem;height:2.14rem;position: absolute;top:13rem;opacity:0;}
+.wap73{left:2.5rem;}
+.wap74{left:6.5rem;}
+.wap75{left:10.5rem;}
+.wapjd2{width:1.16rem;height:0.48rem;position: absolute;top:12.8rem;opacity:0;}
+.wap76{left:3rem;}
+.wap77{left:7rem;}
+.wap78{width:1.44rem;height:0.58rem;position: absolute;top:12.8rem;left:11rem;opacity:0;}
+.wap79{width:3.14rem;height:0rem;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap77.png) no-repeat;background-size: cover;position: absolute;top:15.5rem;left:2rem;}
+.wap80{width:3.48rem;height:0rem;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap78.png) no-repeat;background-size: cover;position: absolute;top:15.5rem;left:6rem;}
+.wap81{width:3.46rem;height:0rem;background:url(https://img.tthunbohui.cn/zhuanti/1023554/wap79.png) no-repeat;background-size: cover;position: absolute;top:15.5rem;left:10rem;}
+.setion7{background: url(https://img.tthunbohui.cn/zhuanti/1023554/wap80.jpg);
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    overflow: hidden;}
+.wap83{width:13.82rem;height:4.16rem;position: absolute;top:2rem;left:50%;margin-left: -6.91rem;opacity:0;}
+.wap84{width:11.64rem;height:3.26rem;position: absolute;top:-10rem;left:2rem;}
+.ul_c{width:13.8rem;margin:3.8rem auto 0;position: relative;z-index: 2;opacity:0;}
+.ul_c li{width:6.46rem;border:1Px solid #333;float:left;margin:0 0.15rem 0.3rem 0.15rem;background:#fff;}
+.pic{width:6.46rem;}
+.pic img{width:100%;}
+.pic_txt{width:6.1rem;margin:0.2rem auto 0;color:#333333;}
+.pic_txt .tit span{font-size: 0.52rem;display:block;line-height:0.5rem;}
+.pic_txt b{font-size: 0.48rem;color:#ef6d6f;font-weight: 100;display:block;}
+.pic_txt .p{color:#666;font-size: 0.48rem;}
+.p_txt{font-size: 0.4rem;color:#666666;line-height: 0.52rem;height:1rem;overflow:hidden;}
+.p_txt i{color:#f17070;font-weight: bold;font-style: normal;}
+.ul_c li .a_wrap{font-size: 0.52rem;color:#fff;display:block;width:100%;line-height: normal;padding:0.15rem 0;background:#f17070;text-align: center;margin-top: 0.2rem;}
+.A_balnk{width:100%;display:block;text-align: center;font-size: 0.5rem;color:#333;text-decoration: underline;line-height: 2;opacity:0;}
+.upImg{width: 0.8rem;
+height: 0.58rem;
+position: absolute;
+left: 50%;
+margin-left: -0.4rem;
+bottom: 0.4rem;
+animation: jt 1s infinite;
+-moz-animation: jt 1s infinite;
+-webkit-animation: jt 1s infinite;}
+.opc{opacity: 1;}
+@-webkit-keyframes swinging{
+   0% { -webkit-transform: rotate(10deg); }
+   50% { -webkit-transform: rotate(-10deg); }
+   100% { -webkit-transform: rotate(10deg); }
+}
+@-webkit-keyframes sacl{
+   0% { -webkit-transform: scale(.9, .9); }
+   50% { -webkit-transform: scale(1.2, 1.2);; }
+   100% { -webkit-transform: scale(.9, .9); }
+}
+@keyframes jt {
+ 0% {
+bottom:2%
+}
+ 50% {
+bottom:5%
+}
+ 100% {
+bottom:2%
+}
+}
+@-moz-keyframes jt {
+ 0% {
+bottom:2%
+}
+ 50% {
+bottom:5%
+}
+ 100% {
+bottom:2%
+}
+}
+@-webkit-keyframes jt {
+ 0% {
+bottom:2%
+}
+ 50% {
+bottom:5%
+}
+ 100% {
+bottom:2%;
+}
+}
     </style>
 </head>
+
+
 <body>
-    <div class="btn">
-        阻塞懒加载的按钮
-    </div>
-    <div class="lazyload">
-        <img class="lazy" data-original="//n.sinaimg.cn/news/175/w105h70/20190417/rlh7-hvvuiym6932432.jpg"  alt="">
-        <img class="lazy" data-original="//n.sinaimg.cn/news/175/w105h70/20190417/cfIY-hvvuiym6944244.jpg" alt="">
-        <img class="lazy" data-original="//n.sinaimg.cn/news/175/w105h70/20190417/JxdY-hvvuiym6969640.jpg"  alt="">
-        <img class="lazy" data-original="https://img.tthunbohui.cn/dmp/h/cms/1554393600/jh-img-orig-ga_1113989505319018496_325_235_63224.jpg@!330w" alt="">
-        <img class="lazy" data-original="https://img.tthunbohui.cn/dmp/h/cms/1554912000/jh-img-orig-ga_1116234905258139648_325_235_53984.jpg@!330w" alt="">
-        <img class="lazy" data-original="https://img.tthunbohui.cn/dmp/h/cms/1554739200/jh-img-orig-ga_1115432898977210368_325_235_22117.jpg@!330w"  alt="">
-        <img class="lazy" data-original="https://img.tthunbohui.cn/dmp/h/cms/1554393600/jh-img-orig-ga_1113994306698485760_800_400_138292.jpg@!670w" alt="">
-        <img class="lazy" data-original="https://img.tthunbohui.cn/dmp/h/cms/1554912000/jh-img-orig-ga_1116235969974116352_800_400_140060.jpg@!670w" alt="">
-    </div>
+        <div id="fullpage" class="wrap">
+                <div style="display:none;">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/80.jpg" alt="" />
+                </div>
+                    <!-- 1开始 -->
+                    <div class="section setion1" style="height: 22rem; ">
+                        <div class="section0" style="">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/21607/lod.gif" alt="">
+                            <p>加载中。。。</p>
+                        </div>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap2.png" alt="" class="wap2">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap3.png" alt="" class="wap3">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap4.png" alt="" class="wap4">
+                        <div class="wap5"></div>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap6.png" alt="" class="wap6">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap7.png" alt="" class="wap7">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/ImgTop.png" alt="" class="upImg">
+                    </div>
+                    <!-- 1结束 -->
+                    <!-- 2开始 -->
+                    <div class="section setion2" style="height: 22rem;">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap13.png" alt="" class="wap13">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap9.png" alt="" class="wap9">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap10.png" alt="" class="wap10">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap11.png" alt="" class="wap11">
+                        <div class="wap12"></div>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap14.png" alt="" class="wap14">
+                        <div class="wap15"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap17.png" alt="" class=""></div>
+                        <div class="wap16">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap18.png" alt="" class="wap18">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap19.png" alt="" class="wap19">
+                        </div>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap20.png" alt="" class="wap20">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap21.png" alt="" class="wap21">
+                        <a href="https://m.jiehun.com.cn/beijing/xiyanjiudian/store/" class="wap22 show opc"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap22.png" alt=""></a>
+                        <a href="https://m.jiehun.com.cn/beijing/demand/?cate_id=1000&amp;position_name=zt_wap_1023554&amp;store_id=0&amp;product_id=0&amp;tpl_id=1" class="wap23 show opc"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap23.png" alt=""></a>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/ImgTop.png" alt="" class="upImg">
+                    </div>
+                    <!-- 2结束 -->
+                    <!--3-->
+                    <div class="section setion3" style="height: 22rem;">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap24.png" alt="" class="wap24">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap25.png" alt="" class="wap25">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap26.png" alt="" class="wap26">
+                        <div class="wap27"></div>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap28.png" alt="" class="wap28">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap29.png" alt="" class="wap29">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap30.png" alt="" class="wap30">
+                        <div class="wap31"></div>
+                        <a href="https://fun.jiehun.com.cn/luckyday/calendar?lucky" class="wap32 show opc"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap32.png" alt=""></a>
+                        <a href="https://fun.jiehun.com.cn/luckyday/calendar?lucky" class="wap33 show opc"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap33.png" alt=""></a>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap34.png" alt="" class="wap34">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap26.png" alt="" class="wap26_2">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap35.png" alt="" class="wap35 ">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap36.png" alt="" class="wap36">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap37.png" alt="" class="wap37">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/ImgTop.png" alt="" class="upImg">
+                    </div>
+                    <!--3结束-->
+                    <!--4-->
+                    <div class="section setion4" style="height: 22rem;">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap39.jpg" alt="" class="wap39">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap40.jpg" alt="" class="wap40">
+                        <div class="wap41"></div>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap42.png" alt="" class="wap42">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap43.png" alt="" class="wap43">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap44.png" alt="" class="wap44">
+                        <div class="wap45"></div>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/ImgTop.png" alt="" class="upImg">
+                    </div>
+                    <!--4结束-->
+                    <!--5-->
+                    <div class="section setion5" style="height: 22rem;">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap47.jpg" alt="" class="wap47">
+                        <div class="wap48">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap49.png" alt="" class="wap49">
+                            <div class="wap54"></div>
+                            <div class="wap50"></div>
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap51.png" alt="" class="wap51">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap52.png" alt="" class="wap52">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap53.png" alt="" class="wap53">
+                        </div>
+                        <a href="https://m.jiehun.com.cn/beijing/xiyanjiudian/store/" class="wap55 show opc"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap63.png" alt=""></a>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap55.png" alt="" class="wap56">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap56.png" alt="" class="wap57">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap57.png" alt="" class="wap58">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap58.png" alt="" class="wap59">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap59.png" alt="" class="wap60">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap60.png" alt="" class="wap61">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap61.png" alt="" class="wap62">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap62.png" alt="" class="wap63">
+                        <a href="https://m.jiehun.com.cn/beijing/xiyanjiudian/store/" class="wap64 show opc"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap64.png" alt=""></a>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/ImgTop.png" alt="" class="upImg">
+                    </div>
+                    <!--5结束-->
+                    <!--6-->
+                    <div class="section setion6" style="height: 22rem;">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap65.jpg" alt="" class="wap65">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap66.jpg" alt="" class="wap66">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap67.png" alt="" class="wap67">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap44.png" alt="" class="wap68">
+                        <div class="wap69">
+                            <a href="https://m.jiehun.com.cn/gonglve/d-2079149/"></a>
+                            <a href="https://m.jiehun.com.cn/gonglve/d-2079155/"></a>
+                            <a href="https://m.jiehun.com.cn/gonglve/d-2079160/"></a>
+                        </div>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap69.jpg" alt="" class="wap70">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap70.png" alt="" class="wap71">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap44.png" alt="" class="wap72">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap71.png" alt="" class="wapjd wap73">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap72.png" alt="" class="wapjd wap74">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap73.png" alt="" class="wapjd wap75">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap74.png" alt="" class="wapjd2 wap76">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap75.png" alt="" class="wapjd2 wap77">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap76.png" alt="" class="wap78">
+                        <div class="wap79"></div>
+                        <div class="wap80"></div>
+                        <div class="wap81"></div>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/ImgTop.png" alt="" class="upImg">
+                    </div>
+                    <!--6结束-->
+                    <!--7-->
+                    <div class="section setion7" style="height: 22rem;">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap81.jpg" alt="" class="wap83">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/zhuanti/1023554/wap82.png" alt="" class="wap84">
+                        <ul class="ul_c fixclear show opc">
+                            <li>
+                                <div class="pic"><a href="https://m.jiehun.com.cn/beijing/store/62135/"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/dmp/h/old/1548259200/jh-img-orig-ga_1088356860556058624_323_191_127317.png" alt=""></a></div>
+                                <div class="pic_txt">
+                                    <div class="fixclear tit"><span class="">花嫁丽舍（海岛婚礼店）</span><b class="">3888元/桌起+15%</b></div>
+                                    <p class="p">10-45桌 | 商圈：蟹岛</p>
+                                    <p class="p_txt"><i>特惠：</i><span>现场定单任意档期服务费立减千元，送十二星座仪式堂…</span></p>
+                                </div>
+                                <a href="https://m.jiehun.com.cn/beijing/demand/?cate_id=1000&amp;position_name=zt_wap_2000025&amp;store_id=62135&amp;product_id=0&amp;tpl_id=1" class="a_wrap zt_demand">预约特惠&gt;</a>
+                            </li>
+                            <li>
+                                <div class="pic"><a href="https://m.jiehun.com.cn/beijing/store/78861/"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/dmp/h/old/1548259200/jh-img-orig-ga_1088357615664996352_323_191_159775.png" alt=""></a></div>
+                                <div class="pic_txt">
+                                    <div class="fixclear tit"><span class="">格乐利雅（日坛店）</span><b class="">4980元/桌起+15%</b></div>
+                                    <p class="p">10-30桌 | 商圈：日坛公园</p>
+                                    <p class="p_txt"><i>特色：</i><span>北京就能办的海岛婚礼，给你一种沉浸式体验</span></p>
+                                </div>
+                                <a href="https://m.jiehun.com.cn/beijing/demand/?cate_id=1000&amp;position_name=zt_wap_2000025&amp;store_id=78861&amp;product_id=0&amp;tpl_id=1" class="a_wrap zt_demand">预约特惠&gt;</a>
+                            </li>
+                            <li>
+                                <div class="pic"><a href="https://m.jiehun.com.cn/beijing/store/10219/"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/dmp/h/old/1548259200/jh-img-orig-ga_1088361604460978176_323_191_153682.jpg" alt=""></a></div>
+                                <div class="pic_txt">
+                                    <div class="fixclear tit"><span class="">北京香格里拉饭店</span><b class="">5880元/桌起</b></div>
+                                    <p class="p">10-60桌 | 商圈：紫竹院</p>
+                                    <p class="p_txt"><i>特惠：</i><span>2019年婚宴部分日期人民币3880元/桌起订…</span></p>
+                                </div>
+                                <a href="https://m.jiehun.com.cn/beijing/demand/?cate_id=1000&amp;position_name=zt_wap_2000025&amp;store_id=10219&amp;product_id=0&amp;tpl_id=1" class="a_wrap zt_demand">预约特惠&gt;</a>
+                            </li>
+                            <li>
+                                <div class="pic"><a href="https://m.jiehun.com.cn/beijing/store/57279/"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-hbh="https://img.tthunbohui.cn/dmp/h/old/1548259200/jh-img-orig-ga_1088362725472313344_323_191_126689.jpg" alt=""></a></div>
+                                <div class="pic_txt">
+                                    <div class="fixclear tit"><span class="">公园158国际婚礼基地</span><b class="">2988元/桌</b></div>
+                                    <p class="p">10-40桌 | 商圈：世界公园</p>
+                                    <p class="p_txt"><i>特惠：</i><span>赠送饮料畅饮、赠送新娘房、免费停车…</span></p>
+                                </div>
+                                <a href="https://m.jiehun.com.cn/beijing/demand/?cate_id=1000&amp;position_name=zt_wap_2000025&amp;store_id=62135&amp;product_id=0&amp;tpl_id=1" class="a_wrap zt_demand">预约特惠&gt;</a>
+                            </li>
+                        </ul>
+                        <a href="https://m.jiehun.com.cn/beijing/xiyanjiudian/store/" class="A_balnk show opc">查看更多适合我的商家&gt;</a>
+                    </div>
+                    <!--7结束-->
+        </div>
+        <div class="_ztshare"></div>
+        <script src="https://img.tthunbohui.cn/zhuanti/11760/jquery-ui-1.10.3.min.js"></script>
+        <script>
+                $(document).ready(function() {
+    var url = window.location.href;
+// 编辑模式下
+if (url.indexOf('static_edit') > 0) {
+        $('.section').show();
+         $('.section .show').addClass('opc');
+        $('.section').css({'height':'22rem'})
+        $('.setion1').hide()
+}
+// 编辑模式外
+if (url.indexOf('static_edit')==-1){
+     $('.section .show').removeClass('opc');
+    $('.section').css({'height':'100%'})
+    $('.setion1').show()
+    $(function () {
+        $('#fullpage').fullpage({
+            anchors: ['setion1', 'setion2', 'setion3', 'setion4', 'setion5', 'setion6', 'setion7','setion8'],
+            afterRender: function (anchorLink, index) {
+                console.log('111')
+                $.fn.fullpage.setAllowScrolling(false)
+                $(window).load(function () { //loging加载页
+                    $('.section0').css({
+                        'display': 'none'
+                    });
+                    $.fn.fullpage.setAllowScrolling(true)
+                    $('.upImg').click(function () {
+                        // body...
+                        $.fn.fullpage.moveSectionDown();
+                    });
+                   $('.setion1').find('.wap3').stop(true,true).animate({'top':'1.5rem'},600,'easeOutBounce',function(){
+                        $('.setion1').find('.wap2').animate({'opacity':'1'}, 500,function(){
+                            $('.setion1').find('.wap4').addClass('animated bounceIn').animate({'opacity':1}, 500,function(){
+                                $('.setion1').find('.wap5').animate({'height':'1.66rem'}, 500,function(){
+                                    $('.setion1').find('.wap6').addClass('animated rubberBand').animate({'opacity':1}, 500,function(){
+                                        $('.setion1').find('.wap7').animate({top:'18.7rem',opacity:1},500,'easeOutBounce')
+                                    })
+                                })
+                            })
+                        })
+                   })
+
+                });
+            },
+            afterLoad: function (anchorLink, index) { //滚动到
+                console.log('2222')
+                $(window).pullpageImg();
+                if (index == 1) {
+                    $('.setion1').find('.wap3').stop(true,true).animate({'top':'1.5rem'},600,'easeOutBounce',function(){
+                        $('.setion1').find('.wap2').animate({'opacity':'1'}, 500,function(){
+                            $('.setion1').find('.wap4').addClass('animated bounceIn').animate({'opacity':1}, 500,function(){
+                                $('.setion1').find('.wap5').animate({'height':'1.66rem'}, 500,function(){
+                                    $('.setion1').find('.wap6').addClass('animated rubberBand').animate({'opacity':1}, 500,function(){
+                                        $('.setion1').find('.wap7').animate({top:'18.7rem',opacity:1},500,'easeOutBounce')
+                                    })
+                                })
+                            })
+                        })
+                   })
+                }
+                if (index == 2) {
+                    $('.wap13').animate({'opacity':1}, 500,function(){
+                        $('.wap9').animate({'left':'50%'}, 500,function(){
+                            $('.wap10').animate({'top':'2rem'}, 500,'easeOutBounce',function(){
+                                $('.wap11').animate({'opacity':1}, 500,function(){
+                                    $('.wap12').animate({'height':'0.92rem'}, 500,function(){
+                                        $('.wap14').animate({'opacity':1}, 500,function(){
+                                            $('.wap15').animate({'left':'2rem'}, 500,function(){
+                                                $('.wap16').animate({'right':'6.8rem'}, 500,function(){
+                                                    $('.wap20, .wap21').animate({'opacity':'1'}, 500,function(){
+                                                        $('.wap22, .wap23').animate({'opacity':1}, 500)
+                                                    })
+                                                    $('.wap15 img, .wap18, .wap19').addClass('animated pulse infinite')
+                                                })
+                                            })
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                    })
+                }
+                if (index == 3) {
+                   $('.wap24').animate({'opacity':1}, 500,function(){
+                        $('.wap25').animate({'left':'50%'}, 500,function(){
+                            $('.wap26').animate({'top':'2.8rem'}, 500,'easeOutBounce',function(){
+                                $('.wap27').animate({'height':'0.98rem'}, 500,function(){
+                                    $('.wap28').animate({'opacity':1}, 500,function(){
+                                        $('.wap29').animate({'left':'2rem'}, 500)
+                                        $('.wap30').animate({'right':'1.5rem'}, 500,function(){
+                                            $('.wap31').animate({'width':'10.92rem'}, 500,function(){
+                                                $('.wap32, .wap33').animate({'opacity':1}, 500,function(){
+                                                    $('.wap34').animate({'left':'50%'}, 500,function(){
+                                                        $('.wap26_2').animate({'top':'14.6rem'}, 500,'easeOutBounce',function(){
+                                                            $('.wap35').addClass('animated rollIn').animate({'opacity':1}, 500)
+                                                            $('.wap36').addClass('animated rotateInDownRight').animate({'opacity':1}, 500,function(){
+                                                                $('.wap37').addClass('animated tada infinite').animate({'opacity':1}, 500)
+                                                            })
+                                                        })
+                                                    })
+                                                })
+                                            })
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                   })
+                }
+                if (index == 4) {
+                   $('.wap39').animate({'opacity':1}, 500,function(){
+                        $('.wap40').animate({'opacity':1}, 500,function(){
+                            $('.wap41').animate({'width':'8rem'}, 500)
+                            $('.wap42').addClass('animated rubberBand').animate({'opacity':1}, 500,function(){
+                                $('.wap43').animate({'left':'50%'}, 500,function(){
+                                    $('.wap44').addClass('saclA').animate({'opacity':1}, 500,function(){
+                                        $('.wap45').animate({'height':'5.54rem'}, 800)
+                                    })
+                                })
+                            })
+                        })
+                   })
+                }
+                if (index == 5) {
+                    $('.wap47').animate({'opacity':1}, 500,function(){
+                        $('.wap48').addClass('animated bounce').animate({'opacity':1}, 500,function(){
+                            $('.wap49').animate({'opacity':1}, 500,function(){
+                                $('.wap54').animate({'width':'11.68rem'}, 500,function(){
+                                        $('.wap50').animate({'height':'1.58rem'}, 500,function(){
+                                            $('.wap51, .wap52, .wap53').addClass('animated rubberBand').animate({'opacity':1}, 500,function(){
+                                                $('.wap55').animate({'opacity':1}, 500,function(){
+                                                    $('.wap56').animate({'right':'50%'}, 500,'easeOutBounce',function(){
+                                                        $('.wap57').animate({'opacity':1}, 500,function(){
+                                                            $('.wap58').addClass('animated rotateInDownLeft').animate({'opacity':1}, 500,function(){
+                                                                $('.wap59, .wap60, .wap61, .wap62').addClass('animated tada').animate({'opacity':1}, 500,function(){
+                                                                    $('.wap63').addClass('animated flash').animate({'opacity':1}, 500,function(){
+                                                                        $('.wap64').animate({'opacity':1}, 500)
+                                                                    })
+                                                                })
+                                                            })
+                                                        })
+                                                    })
+                                                })
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                    })
+                }
+                if (index == 6) {
+                    $('.wap65').animate({'opacity':1}, 500,function(){
+                        $('.wap66').animate({'opacity':1}, 500,function(){
+                            $('.wap67').animate({'left':'50%'}, 500,'easeOutBounce',function(){
+                                $('.wap68').addClass('animated tada').animate({'opacity':1}, 500,function(){
+                                    $('.wap69').animate({'height':'3.56rem'}, 500,function(){
+                                        $('.wap70').animate({'opacity':1}, 500,function(){
+                                            $('.wap71').animate({'right':'50%'}, 500,'easeOutBounce',function(){
+                                                $('.wap72').addClass('animated tada').animate({'opacity':1}, 500,function(){
+                                                    $('.wap73').addClass('animated rubberBand').animate({'opacity':1}, 500,function(){
+                                                        $('.wap76').animate({'opacity':1}, 500,function(){
+                                                            $('.wap79').animate({'height':'2.32rem'}, 500,function(){
+                                                                $('.wap74').addClass('animated tada').animate({'opacity':1}, 500,function(){
+                                                                    $('.wap77').animate({'opacity':1}, 500,function(){
+                                                                        $('.wap80').animate({'height':'2.34rem'}, 500,function(){
+                                                                            $('.wap75').addClass('animated rubberBand').animate({'opacity':1}, 500,function(){
+                                                                                $('.wap78').animate({'opacity':1}, 500,function(){
+                                                                                    $('.wap81').animate({'height':'2.34rem'}, 500)
+                                                                                })
+                                                                            })
+                                                                        })
+                                                                    })
+                                                                })
+                                                            })
+                                                        })
+                                                    })
+                                                })
+                                            })
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                    })
+                }
+                if (index == 7) {
+                   $('.wap83').animate({'opacity':1}, 500,function(){
+                    $('.wap84').animate({'top':0}, 500, 'easeOutBounce',function(){
+                        $('.ul_c').animate({'opacity':1}, 500,function(){
+                            $('.A_balnk').animate({'opacity':1}, 500)
+                        })
+                    })
+                   })
+                }
+            },
+            onLeave: function (index, down) { //离开
+                console.log('333')
+                if (index == 1) {
+                    $('.setion1').find('.wap3').stop().animate({'top':'-10rem'},100,'easeOutBounce',function(){
+                        $('.setion1').find('.wap2').stop().animate({'opacity':'0'}, 100,function(){
+                            $('.setion1').find('.wap4').removeClass('animated bounceIn').stop().animate({'opacity':0}, 100,function(){
+                                $('.setion1').find('.wap5').stop().animate({'height':'0'}, 100,function(){
+                                    $('.setion1').find('.wap6').removeClass('animated rubberBand').stop().animate({'opacity':0}, 100,function(){
+                                        $('.setion1').find('.wap7').stop().animate({top:'100%',opacity:0},100,'easeOutBounce')
+                                    })
+                                })
+                            })
+                        })
+                   })
+                }
+                if (index == 2) {
+                    $('.wap13').stop().animate({'opacity':0}, 100,function(){
+                        $('.wap9').stop().animate({'left':'-10rem'}, 100,function(){
+                            $('.wap10').stop().animate({'top':'-10rem'}, 100,'easeOutBounce',function(){
+                                $('.wap11').stop().animate({'opacity':0}, 100,function(){
+                                    $('.wap12').stop().animate({'height':'0'}, 100,function(){
+                                        $('.wap14').stop().animate({'opacity':0}, 100,function(){
+                                            $('.wap15').stop().animate({'left':'-10rem'}, 100,function(){
+                                                $('.wap16').stop().animate({'right':'-10rem'}, 100,function(){
+                                                    $('.wap20, .wap21').stop().animate({'opacity':'0'}, 100,function(){
+                                                        $('.wap22, .wap23').stop().animate({'opacity':0}, 100)
+                                                    })
+                                                    $('.wap15 img, .wap18, .wap19').removeClass('animated pulse infinite')
+                                                })
+                                            })
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                    })
+                }
+                if (index == 3) {
+                     $('.wap24').stop().animate({'opacity':0}, 100,function(){
+                        $('.wap25').stop().animate({'left':'-10rem'}, 100,function(){
+                            $('.wap26').stop().animate({'top':'-10rem'}, 100,'easeOutBounce',function(){
+                                $('.wap27').stop().animate({'height':'0rem'}, 100,function(){
+                                    $('.wap28').stop().animate({'opacity':0}, 100,function(){
+                                        $('.wap29').stop().animate({'left':'-10rem'}, 100)
+                                        $('.wap30').stop().animate({'right':'-10rem'}, 100,function(){
+                                            $('.wap31').stop().animate({'width':'0rem'}, 100,function(){
+                                                $('.wap32, .wap33').stop().animate({'opacity':0}, 100,function(){
+                                                    $('.wap34').stop().animate({'left':'-10rem'}, 100,function(){
+                                                        $('.wap26_2').stop().animate({'top':'-10rem'}, 100,'easeOutBounce',function(){
+                                                            $('.wap35').removeClass('animated rollIn').stop().animate({'opacity':0}, 100)
+                                                            $('.wap36').removeClass('animated rotateInDownRight').stop().animate({'opacity':0}, 100,function(){
+                                                                $('.wap37').removeClass('animated tada infinite').stop().animate({'opacity':0}, 100)
+                                                            })
+                                                        })
+                                                    })
+                                                })
+                                            })
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                   })
+                }
+                if (index == 4) {
+                    $('.wap39').stop().animate({'opacity':0}, 100,function(){
+                        $('.wap40').stop().animate({'opacity':0}, 100,function(){
+                            $('.wap41').stop().animate({'width':'0rem'}, 100)
+                            $('.wap42').removeClass('animated rubberBand').stop().animate({'opacity':0}, 100,function(){
+                                $('.wap43').stop().animate({'left':'-10rem'}, 100,function(){
+                                    $('.wap44').removeClass('saclA').stop().animate({'opacity':0}, 100,function(){
+                                        $('.wap45').stop().animate({'height':'0rem'}, 100)
+                                    })
+                                })
+                            })
+                        })
+                   })
+                }
+                if (index == 5) {
+                    $('.wap47').stop().animate({'opacity':0}, 100,function(){
+                        $('.wap48').removeClass('animated bounce').stop().animate({'opacity':0}, 100,function(){
+                            $('.wap49').stop().animate({'opacity':0}, 100,function(){
+                                $('.wap54').stop().animate({'width':'0rem'}, 100,function(){
+                                        $('.wap50').stop().animate({'height':'0rem'}, 100,function(){
+                                            $('.wap51, .wap52, .wap53').removeClass('animated rubberBand').stop().animate({'opacity':0}, 100,function(){
+                                                $('.wap55').stop().animate({'opacity':0}, 100,function(){
+                                                    $('.wap56').stop().animate({'right':'-10rem'}, 100,'easeOutBounce',function(){
+                                                        $('.wap57').stop().animate({'opacity':0}, 100,function(){
+                                                            $('.wap58').removeClass('animated rotateInDownLeft').stop().animate({'opacity':0}, 100,function(){
+                                                                $('.wap59, .wap60, .wap61, .wap62').removeClass('animated tada').stop().animate({'opacity':0}, 100,function(){
+                                                                    $('.wap63').removeClass('animated flash').stop().animate({'opacity':0}, 100,function(){
+                                                                        $('.wap64').stop().animate({'opacity':0}, 100)
+                                                                    })
+                                                                })
+                                                            })
+                                                        })
+                                                    })
+                                                })
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                    })
+                }
+                if (index == 6) {
+                    $('.wap65').stop().animate({'opacity':0}, 100,function(){
+                        $('.wap66').stop().animate({'opacity':0}, 100,function(){
+                            $('.wap67').stop().animate({'left':'-10rem'}, 100,'easeOutBounce',function(){
+                                $('.wap68').removeClass('animated tada').stop().animate({'opacity':0}, 100,function(){
+                                    $('.wap69').stop().animate({'height':'0rem'}, 100,function(){
+                                        $('.wap70').stop().animate({'opacity':0}, 100,function(){
+                                            $('.wap71').stop().animate({'right':'-10rem'}, 500,'easeOutBounce',function(){
+                                                $('.wap72').removeClass('animated tada').stop().animate({'opacity':0}, 100,function(){
+                                                    $('.wap73').removeClass('animated rubberBand').stop().animate({'opacity':0}, 100,function(){
+                                                        $('.wap76').stop().animate({'opacity':0}, 100,function(){
+                                                            $('.wap79').stop().animate({'height':'0'}, 100,function(){
+                                                                $('.wap74').removeClass('animated tada').stop().animate({'opacity':0}, 100,function(){
+                                                                    $('.wap77').stop().animate({'opacity':0}, 100,function(){
+                                                                        $('.wap80').stop().animate({'height':'0rem'}, 500,function(){
+                                                                            $('.wap75').removeClass('animated rubberBand').stop().animate({'opacity':0}, 100,function(){
+                                                                                $('.wap78').stop().animate({'opacity':0}, 100,function(){
+                                                                                    $('.wap81').stop().animate({'height':'0rem'}, 100)
+                                                                                })
+                                                                            })
+                                                                        })
+                                                                    })
+                                                                })
+                                                            })
+                                                        })
+                                                    })
+                                                })
+                                            })
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                    })
+                }
+                if (index == 7) {
+                    $('.wap83').stop().animate({'opacity':0}, 100,function(){
+                    $('.wap84').stop().animate({'top':'-10em'}, 100, 'easeOutBounce',function(){
+                        $('.ul_c').stop().animate({'opacity':0}, 100,function(){
+                            $('.A_balnk').stop().animate({'opacity':0}, 100)
+                        })
+                    })
+                   })
+                }
+            }
+        });
+    });
+}
+});
+                </script>
+
 </body>
 </html>

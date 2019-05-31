@@ -4,7 +4,10 @@
         <div id="container"></div>
 
         <button @click="action">事件上报</button>
-        <a href="https://m.jiehun.com.cn/baike/">测试referer</a>
+        <!-- <a href="https://m.jiehun.com.cn/baike/">测试referer</a> -->
+
+        <div class="action_post_web_data" data-action="{ actionName:'tab_gonglve',    actionValue:' https://m.jiehun.com.cn'}">action_post_web_data</div>
+
     </div>
 </template>
 
@@ -14,6 +17,11 @@ import {mapMutations} from 'vuex'
 export default {
     created(){
         this.HEADERTITLE('数据上报');
+         var scm_data = {
+            'scm':'123',
+            'scm_name':'indexOB'
+        }
+        window.sessionStorage.setItem('scm_data',JSON.stringify(scm_data))
     },
     mounted(){
         //console.log(window.location.href)
@@ -27,7 +35,9 @@ export default {
                 "actionName":"tab",
                 "actionValue":"https://m.jiehun.com.cn"
             }
-            window.$action.h_actionDatas(params);
+            window.$action.h_actionDatas(params,function(){
+                console.log(res)
+            });
         },
         contains(){
             //1-load:3.56s;

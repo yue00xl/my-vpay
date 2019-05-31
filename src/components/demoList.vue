@@ -89,7 +89,7 @@ export default {
         },
         {
           name:'数据上报',
-          url:'/indexDB'
+          url:'/indexDB?status=2'
         },
       ]
     }
