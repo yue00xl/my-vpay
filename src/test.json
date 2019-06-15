@@ -1,0 +1,2456 @@
+[
+    {
+        "new": [
+            {
+                "value": "91",
+                "name": "主键",
+                "color": "0",
+                "show": "0"
+            },
+            {
+                "value": "史上最全",
+                "name": "规则名称",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "长期",
+                "name": "有效期",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "工资",
+                "name": "承运类型",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "不限",
+                "name": "出发地",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "不限",
+                "name": "目的地",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "不反向",
+                "name": "是否反向",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "不限",
+                "name": "车辆分组列表",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "不限",
+                "name": "行驶类型",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "地区",
+                "name": "地区\/库",
+                "color": "0",
+                "show": "1"
+            }
+        ],
+        "old": [
+            {
+                "value": "91",
+                "name": "主键",
+                "color": "0",
+                "show": "0"
+            },
+            {
+                "value": "史上最全",
+                "name": "规则名称",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "长期",
+                "name": "有效期",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "工资",
+                "name": "承运类型",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "不限",
+                "name": "出发地",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "不限",
+                "name": "目的地",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "不反向",
+                "name": "是否反向",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "不限",
+                "name": "车辆分组列表",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "不限",
+                "name": "行驶类型",
+                "color": "0",
+                "show": "1"
+            },
+            {
+                "value": "地区",
+                "name": "地区\/库",
+                "color": "0",
+                "show": "1"
+            }
+        ],
+        "child": [
+            {
+                "new": [
+                    {
+                        "value": "100",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每台",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "洗车费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "old": [
+                    {
+                        "value": "100",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每台",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "洗车费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "child": [
+                    {
+                        "new": [
+                            {
+                                "value": "商品车品牌",
+                                "name": "条件类型",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "包含",
+                                "name": "符号",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "凯迪拉克",
+                                "name": "值",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "且",
+                                "name": "关联条件",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "91",
+                                "name": "主表主键",
+                                "color": "0",
+                                "show": "0"
+                            }
+                        ],
+                        "old": [
+                            {
+                                "value": "商品车品牌",
+                                "name": "条件类型",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "包含",
+                                "name": "符号",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "凯迪拉克",
+                                "name": "值",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "且",
+                                "name": "关联条件",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "91",
+                                "name": "主表主键",
+                                "color": "0",
+                                "show": "0"
+                            }
+                        ]
+                    },
+                    {
+                        "new": [
+                            {
+                                "value": "是否交车",
+                                "name": "条件类型",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "是",
+                                "name": "值",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "91",
+                                "name": "主表主键",
+                                "color": "0",
+                                "show": "0"
+                            }
+                        ],
+                        "old": [
+                            {
+                                "value": "是否交车",
+                                "name": "条件类型",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "是",
+                                "name": "值",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "0",
+                                "show": "1"
+                            },
+                            {
+                                "value": "91",
+                                "name": "主表主键",
+                                "color": "0",
+                                "show": "0"
+                            }
+                        ]
+                    },
+                    {
+                        "old": [
+                            {
+                                "value": "商品车品牌",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "包含",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "宝马,奔驰",
+                                "name": "值",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "且",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        ]
+                    },
+                    {
+                        "old": [
+                            {
+                                "value": "是否交车",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "是",
+                                "name": "值",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        ]
+                    },
+                    {
+                        "old": [
+                            {
+                                "value": "是否交车",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "是",
+                                "name": "值",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "且",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        ]
+                    },
+                    {
+                        "old": [
+                            {
+                                "value": "任务重驶里程",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "大于等于",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 5000,
+                                "name": "值",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "且",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        ]
+                    },
+                    {
+                        "old": [
+                            {
+                                "value": "商品车品牌",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "包含",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "奥迪",
+                                "name": "值",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        ]
+                    },
+                    {
+                        "old": [
+                            {
+                                "value": "是否交车",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "是",
+                                "name": "值",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "new": [
+                    {
+                        "value": "150",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每台",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "洗车费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "old": [
+                    {
+                        "value": "150",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每台",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "洗车费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "child": [
+                    {
+                        "new": [
+                            {
+                                "value": "商品车品牌",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "包含",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "宝马,奔驰",
+                                "name": "值",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "且",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    },
+                    {
+                        "new": [
+                            {
+                                "value": "是否交车",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "是",
+                                "name": "值",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    }
+                ]
+            },
+            {
+                "new": [
+                    {
+                        "value": "200",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每台",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "洗车费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "old": [
+                    {
+                        "value": "200",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每台",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "洗车费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "child": [
+                    {
+                        "new": [
+                            {
+                                "value": "是否交车",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "是",
+                                "name": "值",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "且",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    },
+                    {
+                        "new": [
+                            {
+                                "value": "任务重驶里程",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "大于等于",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 5000,
+                                "name": "值",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "且",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    },
+                    {
+                        "new": [
+                            {
+                                "value": "商品车品牌",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "包含",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "奥迪",
+                                "name": "值",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    }
+                ]
+            },
+            {
+                "new": [
+                    {
+                        "value": "40",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每台",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "洗车费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "old": [
+                    {
+                        "value": "40",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每台",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "洗车费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "child": [
+                    {
+                        "new": [
+                            {
+                                "value": "是否交车",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "是",
+                                "name": "值",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    }
+                ]
+            },
+            {
+                "new": [
+                    {
+                        "value": "200",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每板",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "过路费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "old": [
+                    {
+                        "value": "200",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每板",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "过路费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "child": [
+                    {
+                        "new": [
+                            {
+                                "value": "单板装载台数",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 5,
+                                "name": "值",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    },
+                    {
+                        "old": [
+                            {
+                                "value": "单板装载台数",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 5,
+                                "name": "值",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        ]
+                    },
+                    {
+                        "old": [
+                            {
+                                "value": "单板装载台数",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "大于",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 5,
+                                "name": "值",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        ]
+                    },
+                    {
+                        "old": [
+                            {
+                                "value": "单板装载台数",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "小于",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 5,
+                                "name": "值",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        ]
+                    },
+                    {
+                        "old": [
+                            {
+                                "value": "任务重驶里程",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "大于等于",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 5000,
+                                "name": "值",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "且",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        ]
+                    },
+                    {
+                        "old": [
+                            {
+                                "value": "出发地",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "包含",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "北京城区,崇文区,宣武区,北京库,昌平区回龙观镇,北京市密云县十里堡镇,北京市小红门,北京市房山区阎村镇,北京市昌平区北七家镇,北京市朝阳区小红门,北京市石景山区古城镇,北京市顺义区后沙峪镇,密云县长安东区,大兴区黄村镇,北京市BAK,延庆区（空驶）,北京市顺义区李遂镇,黄村火车站,亦庄经济开发区,亦庄经济技术开发区",
+                                "name": "值",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "new": [
+                    {
+                        "value": "300",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每板",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "过路费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "old": [
+                    {
+                        "value": "300",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每板",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "过路费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "child": [
+                    {
+                        "new": [
+                            {
+                                "value": "单板装载台数",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "大于",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 5,
+                                "name": "值",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    }
+                ]
+            },
+            {
+                "new": [
+                    {
+                        "value": "100",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每板",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "过路费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "old": [
+                    {
+                        "value": "100",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每板",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "过路费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "child": [
+                    {
+                        "new": [
+                            {
+                                "value": "单板装载台数",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "小于",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 5,
+                                "name": "值",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    }
+                ]
+            },
+            {
+                "new": [
+                    {
+                        "value": "400",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每板",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "过路费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "old": [
+                    {
+                        "value": "400",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每板",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "过路费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "child": [
+                    {
+                        "new": [
+                            {
+                                "value": "任务重驶里程",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "大于等于",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 5000,
+                                "name": "值",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "且",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    },
+                    {
+                        "new": [
+                            {
+                                "value": "出发地",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "包含",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "北京城区,崇文区,宣武区,北京库,昌平区回龙观镇,北京市密云县十里堡镇,北京市小红门,北京市房山区阎村镇,北京市昌平区北七家镇,北京市朝阳区小红门,北京市石景山区古城镇,北京市顺义区后沙峪镇,密云县长安东区,大兴区黄村镇,北京市BAK,延庆区（空驶）,北京市顺义区李遂镇,黄村火车站,亦庄经济开发区,亦庄经济技术开发区",
+                                "name": "值",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    }
+                ]
+            },
+            {
+                "new": [
+                    {
+                        "value": "30",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每台",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "提车费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "old": [
+                    {
+                        "value": "30",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每台",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "提车费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "child": [
+                    {
+                        "new": [
+                            {
+                                "value": "经销商",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "包含",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "且",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    },
+                    {
+                        "new": [
+                            {
+                                "value": "是否交车",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "是",
+                                "name": "值",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    },
+                    {
+                        "old": {
+                            "0": {
+                                "value": "经销商",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            "1": {
+                                "value": "包含",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            "3": {
+                                "value": "且",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            "4": {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        }
+                    },
+                    {
+                        "old": [
+                            {
+                                "value": "是否交车",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "是",
+                                "name": "值",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        ]
+                    },
+                    {
+                        "old": {
+                            "0": {
+                                "value": "经销商",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            "1": {
+                                "value": "包含",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            "3": {
+                                "value": "且",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            "4": {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        }
+                    },
+                    {
+                        "old": [
+                            {
+                                "value": "是否交车",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "是",
+                                "name": "值",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "new": [
+                    {
+                        "value": "1212",
+                        "name": "费用金额",
+                        "color": "1",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每台",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "提车费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "old": [
+                    {
+                        "value": "40",
+                        "name": "费用金额",
+                        "color": "1",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每台",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "提车费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "child": [
+                    {
+                        "new": [
+                            {
+                                "value": "经销商",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "包含",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "且",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    },
+                    {
+                        "new": [
+                            {
+                                "value": "是否交车",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "是",
+                                "name": "值",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    }
+                ]
+            },
+            {
+                "new": [
+                    {
+                        "value": "1",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "调令",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "油费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "old": [
+                    {
+                        "value": "1",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "调令",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "油费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ]
+            },
+            {
+                "new": [
+                    {
+                        "value": "1.2",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "报销\/尾款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每公里",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "绕路费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "old": [
+                    {
+                        "value": "1.2",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "报销\/尾款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每公里",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "绕路费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ]
+            },
+            {
+                "new": [
+                    {
+                        "value": "70",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每板",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "地跑费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "old": [
+                    {
+                        "value": "70",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "任务借款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "每板",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "地跑费",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ]
+            },
+            {
+                "new": [
+                    {
+                        "value": "200",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "报销\/尾款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "调令",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "同城多点补助",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "old": [
+                    {
+                        "value": "200",
+                        "name": "费用金额",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "报销\/尾款",
+                        "name": "使用场景",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "100",
+                        "name": "费用项比例",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "调令",
+                        "name": "单位",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "同城多点补助",
+                        "name": "费用名称",
+                        "color": "0",
+                        "show": "1"
+                    },
+                    {
+                        "value": "91",
+                        "name": "主表主键",
+                        "color": "0",
+                        "show": "0"
+                    }
+                ],
+                "child": [
+                    {
+                        "new": [
+                            {
+                                "value": " 调令交车门店数量",
+                                "name": "条件类型",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "1城2店",
+                                "name": "值",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "2",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "2",
+                                "show": "0"
+                            }
+                        ],
+                        "old": []
+                    },
+                    {
+                        "old": [
+                            {
+                                "value": " 调令交车门店数量",
+                                "name": "条件类型",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "等于",
+                                "name": "符号",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "1城2店",
+                                "name": "值",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": "或",
+                                "name": "关联条件",
+                                "color": "3",
+                                "show": "1"
+                            },
+                            {
+                                "value": 91,
+                                "name": "主表主键",
+                                "color": "3",
+                                "show": "0"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -91,6 +91,10 @@ export default {
           name:'数据上报',
           url:'/indexDB?status=2'
         },
+        {
+          name:'getBoundingClientRect',
+          url:'/getBoundingClientRect'
+        }
       ]
     }
   }

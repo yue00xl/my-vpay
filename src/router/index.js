@@ -23,6 +23,7 @@ import sortTable from '@/components/common/Sortable'
 import wangeditor from '@/components/common/wangeditor'
 import wx from '@/components/common/wx'
 import indexDB from '@/components/common/indexDB'
+import getBoundingClientRect from '@/components/common/getBoundingClientRect'
 
 Vue.use(Router)
 
@@ -136,6 +137,11 @@ export default new Router({
       path: '/indexDB',
       name: 'indexDB',
       component: indexDB
+    },
+    {
+      path: '/getBoundingClientRect',
+      name: 'getBoundingClientRect',
+      component: getBoundingClientRect
     }
   ]
 })

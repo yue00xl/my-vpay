@@ -15,6 +15,13 @@
 <script>
 import {mapMutations} from 'vuex'
 export default {
+    data(){
+        return{
+            temp:1,
+            temp1:'tempq',
+            temp2:{obj:1}
+        }
+    },
     created(){
         this.HEADERTITLE('数据上报');
          var scm_data = {
@@ -24,6 +31,11 @@ export default {
         window.sessionStorage.setItem('scm_data',JSON.stringify(scm_data))
     },
     mounted(){
+            var temp = 1;
+            var temp1 = 'tempq';
+            var temp2 = {obj:1};
+        console.log({temp,temp1,temp2})
+        
         //console.log(window.location.href)
         //this.newBuild()
         //this.contains();
@@ -33,7 +45,8 @@ export default {
         action(){
             var params = {
                 "actionName":"tab",
-                "actionValue":"https://m.jiehun.com.cn"
+                "actionValue":"https://m.jiehun.com.cn",
+                "actionType":'view'
             }
             window.$action.h_actionDatas(params,function(){
                 console.log(res)
