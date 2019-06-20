@@ -92,8 +92,8 @@ export default {
           url:'/indexDB?status=2'
         },
         {
-          name:'getBoundingClientRect',
-          url:'/getBoundingClientRect'
+          name:'digui',
+          url:'/digui'
         }
       ]
     }

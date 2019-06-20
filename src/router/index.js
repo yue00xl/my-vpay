@@ -23,7 +23,8 @@ import sortTable from '@/components/common/Sortable'
 import wangeditor from '@/components/common/wangeditor'
 import wx from '@/components/common/wx'
 import indexDB from '@/components/common/indexDB'
-import getBoundingClientRect from '@/components/common/getBoundingClientRect'
+import digui from '@/components/common/digui'
+
 
 Vue.use(Router)
 
@@ -139,9 +140,9 @@ export default new Router({
       component: indexDB
     },
     {
-      path: '/getBoundingClientRect',
-      name: 'getBoundingClientRect',
-      component: getBoundingClientRect
+      path: '/digui',
+      name: 'digui',
+      component: digui
     }
   ]
 })
