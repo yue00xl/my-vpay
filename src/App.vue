@@ -8,6 +8,7 @@
 <script>
 import defaultHeader from '@/components/public/defaultHeader'
 import {mapState} from 'vuex'
+// import postdata from 'postdata'
 export default {
   name: 'App',
   components:{
@@ -33,9 +34,7 @@ export default {
   mounted(){
     this.$store.commit('HEADERTITLE','首页');
     this.Header = this.$refs.defaultHeader.$refs.defaultHeader.clientHeight;
-    this.routerHeight = window.innerHeight - this.Header;
-
-    
+    this.routerHeight = window.innerHeight - this.Header;    
   },
   computed:{
     ...mapState(['headersTitle'])
@@ -43,10 +42,9 @@ export default {
   methods:{
     postdata(){
       window.$action= new postdata({
-          url:'http://open.test.jiehun.com.cn/user/sdk/post-web-data',
-          domain:'localhost',
-          pageid_type:true
+        //debug:true
       })
+      console.log(window.$action)
     }
   }
 }

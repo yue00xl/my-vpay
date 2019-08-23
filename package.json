@@ -14,6 +14,8 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "postdata": "git+http://gitlab.jiehun.tech/fed/base/postdata.git#tag_0.1.0",
+    "hbhbrowser":"git+http://gitlab.jiehun.tech/fed/base/hbhbrowser.git#0.0.1",
     "hbh-upload": "git+http://gitlab.jiehun.tech/fed/components/upload.git#develop",
     "amfe-flexible": "^2.2.1",
     "axios": "^0.18.0",

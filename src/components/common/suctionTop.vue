@@ -26,11 +26,12 @@ export default{
         }
     },
     mounted(){
+        this.$refs.suctionTop.addEventListener('scroll', this.handleScroll);
         // handleScroll为页面滚动的监听回调
-        this.$nextTick(function(){
-            this.$refs.suctionTop.addEventListener('scroll', this.handleScroll);
-            this.init();
-        })
+        // this.$nextTick(function(){
+        //     this.$refs.suctionTop.addEventListener('scroll', this.handleScroll);
+        //     this.init();
+        // })
     },
     // destroyed(){
     //     window.removeEventListener('scroll', this.handleScroll);
@@ -49,10 +50,11 @@ export default{
             // 得到页面滚动的距离
             let _this = this;
             let scrollTop = _this.$refs.suctionTop.scrollTop;
-            
-            // 判断页面滚动的距离是否大于吸顶元素的位置
-            this.headerFixed = scrollTop > (this.offsetTop - this.offsetHeight);
-            console.log(this.headerFixed)
+            document.title = scrollTop;
+            console.log(scrollTop)
+            // // 判断页面滚动的距离是否大于吸顶元素的位置
+            // this.headerFixed = scrollTop > (this.offsetTop - this.offsetHeight);
+            // console.log(this.headerFixed)
         }
     }
 }

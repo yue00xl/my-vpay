@@ -2,10 +2,9 @@
 <!--wangeditor-->
 <template>
     <div>
-
-        <div v-for="item in formData">
-            {{item.id}}
-            <wang-editors v-model="item.text" :keys="item.id"></wang-editors>
+        <div v-for="(item,index) in formData">
+            {{item}}
+            <wang-editors v-model="item.text" :keys="item.index" ></wang-editors>
         </div>
 
         
@@ -27,14 +26,24 @@ export default{
     },
     data(){
         return{
+            index:0,
+            sortArr:[],
             formData:[
-                {text:'<p>000</p>',id:0},
-                {text:'<p>111</p>',id:1}
+                {text:'<p>000</p>'},
+                {text:'<p>111</p>'}
             ],
         }
     },
     created(){
         this.HEADERTITLE('wangEditor');
+        var count=10;
+        for (var i=0;i<count;i++){
+            this.sortArr[i]=i+1;
+        }
+        for(let i=0;i<this.formData.length;i++){
+            this.formData[i].index = this.sortArr[i];
+        }
+        this.sortArr.splice(0,this.formData.length)
     },
     mounted(){
         
@@ -43,20 +52,31 @@ export default{
         ...mapMutations(['HEADERTITLE']),
         get_content(){
             console.log(this.formData)
+            for(let i=0; i<this.formData.length;i++){
+                if(this.formData[i]['index']){
+                    delete this.formData[i].index;
+                }
+            }
         },
         add(){
             //新增一个
-            var obj = {text:'',id:2};
+            var obj = {text:''};
+            obj.index = this.sortArr[0];
             this.formData.unshift(obj)
-            console.log(this.formData)
+            this.sortArr.splice(0,1)
         },
         jiaohuan(){
             //交换位置
             this.swapArr(this.formData,0,1)
         },
-        swapArr(arr, index1, index2){
+        swapArr(arr, index1, index2){ 
             arr[index1] = arr.splice(index2, 1, arr[index1])[0];
             return arr;
+        },
+        getId(index){
+            let num = Math.random()
+            let mathIndex = Math.ceil(num*10)
+            return String(index) + String(mathIndex);
         }
     }
 }

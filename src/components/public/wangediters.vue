@@ -20,6 +20,7 @@ export default{
     },
     watch:{
         keys(val){
+            //console.log(val)
             if(this.editor){
                 this.editor.txt.clear();
                 this.editor.txt.html(this.value)

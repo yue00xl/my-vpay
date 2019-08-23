@@ -4,7 +4,6 @@
         <div id="container"></div>
 
         <button @click="action">事件上报</button>
-        <!-- <a href="https://m.jiehun.com.cn/baike/">测试referer</a> -->
 
         <div class="action_post_web_data" data-action="{ actionName:'tab_gonglve',    actionValue:' https://m.jiehun.com.cn'}">action_post_web_data</div>
 
