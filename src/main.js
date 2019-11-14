@@ -18,18 +18,18 @@ import './assets/css/common.css'
 
 Vue.prototype.$axios = axios;
 
-
+// Vue.prototype.$store = store;
 
 
 /* eslint-disable no-new */
-router.beforeEach((to,from,next)=>{
-  let isLogin = localStorage.getItem('token') ? localStorage.getItem('token') : false
-  if(isLogin || to.name == 'Login'){
-    next();
-  }else{
-    next({path:'/login'})
-  }
-})
+// router.beforeEach((to,from,next)=>{
+//   let isLogin = localStorage.getItem('token') ? localStorage.getItem('token') : false
+//   if(isLogin || to.name == 'Login'){
+//     next();
+//   }else{
+//     next({path:'/login'})
+//   }
+// })
 
 
 

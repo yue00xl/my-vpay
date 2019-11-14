@@ -29,8 +29,8 @@ export default{
             index:0,
             sortArr:[],
             formData:[
-                {text:'<p>000</p>'},
-                {text:'<p>111</p>'}
+                {text:'<p>水电费水电费水电费水电费</p>'},
+                {text:'<p>温热温热污染物</p>'}
             ],
         }
     },

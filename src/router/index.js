@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/Login'
+
 import demoList from '@/components/demoList'
 import suctionTop from '@/components/common/suctionTop'
 import Promises from '@/components/common/Promise'
@@ -24,9 +24,11 @@ import wangeditor from '@/components/common/wangeditor'
 import wx from '@/components/common/wx'
 import indexDB from '@/components/common/indexDB'
 import digui from '@/components/common/digui'
+import mintui from '@/components/common/mintui'
 
 
 Vue.use(Router)
+
 
 export default new Router({
   routes: [
@@ -36,23 +38,18 @@ export default new Router({
       component: demoList,
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: Login,
-    },
-    {
       path: '/suctionTop',
-      name: 'suctionTop',
+      name: '吸顶效果',
       component: suctionTop,
     },
     {
       path: '/promises',
-      name: 'Promises',
+      name: 'promises',
       component: Promises,
     },
     {
-      path: '/flex',
-      name: 'flex',
+      path: '/npm',
+      name: '封装npm包使用',
       component: flex,
     },
     {
@@ -66,83 +63,88 @@ export default new Router({
     },
     {
       path: '/debounce',
-      name: 'debounce',
+      name: 'JS的节流、防抖及使用场景',
       component: debounce,
     },
     {
       path: '/Inputs',
-      name: 'Input',
+      name: 'Input各种坑',
       component: Input,
     },
     {
       path: '/popstate',
-      name: 'popState',
+      name: '监听浏览器返回',
       component: popState,
     },
     {
       path: '/uploadfile',
-      name: 'uploadFile',
+      name: '上传视频前进行预览',
       component: uploadFile
     },
     {
       path: '/array',
-      name: 'array',
+      name: '数组和对象的一些操作',
       component: Arrays
     },
     {
       path: '/function',
-      name: 'function',
+      name: '函数传参更优雅的方式',
       component: Functions
     },
     {
       path: '/vue_slot',
-      name: 'slot',
+      name: 'vue-slot的使用-1',
       component: vueSlot
     },
     {
-      path: '/vue_slot2',
+      path: '/vue-slot的使用-2',
       name: 'slot2',
       component: vueSlot2
     },
     {
       path: '/else_switch',
-      name: 'elseSwitch',
+      name: 'JavaScript 复杂判断的更优雅写法',
       component: elseSwitch
     },
     {
       path: '/vuemodel',
-      name: 'vueModel',
+      name: 'vue双向绑定v-model',
       component: vueModel
     },
     {
       path: '/algorithm',
-      name: 'algorithm',
+      name: 'js基础算法',
       component: algorithm
     },
     {
       path: '/sortTable',
-      name: 'sortTable',
+      name: '基于element-ui table拖动排序',
       component: sortTable
     },
     {
       path: '/wangeditor',
-      name: 'wangeditor',
+      name: 'wangEditor富文本编辑器',
       component: wangeditor
     },
     {
       path: '/wx',
-      name: 'wx',
+      name: '浏览器缓存',
       component: wx
     },
     {
       path: '/indexDB',
-      name: 'indexDB',
+      name: '数据上报',
       component: indexDB
     },
     {
       path: '/digui',
-      name: 'digui',
+      name: '递归',
       component: digui
+    },
+    {
+      path:'/mintui',
+      name:'ES5/ES6',
+      component:mintui
     }
   ]
 })

@@ -24,15 +24,15 @@ export default {
     $route (to, from) {
       // 对路由变化作出响应...
       this.$nextTick(()=>{
-        window.$action._init();
+        //window.$action._init();
       })
     }
   },
   created(){
-    this.postdata();
+    //this.postdata();
   },
   mounted(){
-    this.$store.commit('HEADERTITLE','首页');
+    //this.$store.commit('HEADERTITLE','首页');
     this.Header = this.$refs.defaultHeader.$refs.defaultHeader.clientHeight;
     this.routerHeight = window.innerHeight - this.Header;    
   },
