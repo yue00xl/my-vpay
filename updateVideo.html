@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./static/jquery.1-11.min.js"></script>
+    <script src="./static/all_oss.min.js"></script>
+</head>
+<body>
+    <input type="file" id="file"/>
+    <script type="text/javascript">
+
+        var conf = {
+            url:'http://localhost:8088/zone/conf',
+            type:'POST',
+            data:{},
+            success:function(res){
+                console.log(res)
+            },
+            error:function(err){
+                console.log(err)
+            }
+        }
+        $.ajax(conf)
+
+        //AzYiTAZAE7WXZWE7
+        function update(appkey,callback){
+            var params = {
+                "appKey":appkey
+            }
+            var ajax = {
+                url:'http://open.test.jiehun.com.cn/vos/inner/ali/getVoucherByAppkey',
+                type:'post',
+                data:JSON.stringify(params),
+                headers:{
+                    "Content-Type":"application/json;charset=UTF-8"
+                },
+                success:function (res) {
+                    var config = res.data;
+                
+                    var client = new OSS({
+                        accessKeyId: config.accessKeyId,
+                        accessKeySecret: config.accessKeySecret,
+                        stsToken: config.securityToken,
+                        bucket: config.bucket,
+                        endpoint: config.endpoint,
+                        region: config.region,
+                    });
+                    //console.log(config)
+                    callback(client,config);
+                },
+                error:function (err) {
+                    
+                }   
+            }
+            $.ajax(ajax)
+        }
+        
+        
+
+        document.getElementById('file').addEventListener('change', function (e) {
+          let file = e.target.files[0];
+          console.log(file)
+          var appKey = 'x4AMmQ5NzPPoWCyp';
+          update(appKey,function(client,config){
+            var name = `${config.path}${config.videoIdStr}.${file.name.split('.').pop()}`;
+            var callback = {
+                    url: config.callbackUrl,
+                    body: config.callbackBody,
+                    contentType: config.callbackBodyType,
+                    customValue: {
+                    videoId: config.videoIdStr,
+                    appKey,
+                }
+            }
+            client.multipartUpload(name, 'https://vod.hbhcdn.com/qukan/vod/d09a115b-b7e8-42d7-9abc-f030a86969e3.mp4',{
+                progress: (percentage, lastpoint) => {
+                    //console.log(percentage,lastpoint)
+                },
+                callback
+            }).then(function (result) {
+                //console.log(result);
+            }).catch(function (err) {
+                console.log(err);
+            });
+          })
+        });
+      </script>
+</body>
+</html>

@@ -25,6 +25,7 @@ import wx from '@/components/common/wx'
 import indexDB from '@/components/common/indexDB'
 import digui from '@/components/common/digui'
 import mintui from '@/components/common/mintui'
+import wangeditor_config from '@/components/common/wangeditor_new'
 
 
 Vue.use(Router)
@@ -125,6 +126,11 @@ export default new Router({
       path: '/wangeditor',
       name: 'wangEditor富文本编辑器',
       component: wangeditor
+    },
+    {
+      path: '/wangeditor_config',
+      name: 'wangEditor富文本编辑器2',
+      component: wangeditor_config
     },
     {
       path: '/wx',

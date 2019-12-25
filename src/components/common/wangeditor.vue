@@ -2,11 +2,12 @@
 <!--wangeditor-->
 <template>
     <div>
-        <div v-for="(item,index) in formData">
-            {{item}}
+        <!-- <div v-for="(item,index) in formData">
             <wang-editors v-model="item.text" :keys="item.index" ></wang-editors>
-        </div>
+        </div> -->
 
+
+        <wang-editors v-model="copys" keys="1" ></wang-editors>
         
         <el-button type="primary" class="primarys" @click="get_content">保存内容</el-button>
         <el-button type="primary" class="primarys" @click="jiaohuan">换位置</el-button>
@@ -14,6 +15,10 @@
         <!-- <div>
             {{this.content}}
         </div> -->
+
+        <div>
+            <div v-html="copys"></div>
+        </div>
     </div>
 </template>
 
@@ -32,6 +37,7 @@ export default{
                 {text:'<p>水电费水电费水电费水电费</p>'},
                 {text:'<p>温热温热污染物</p>'}
             ],
+            copys:''
         }
     },
     created(){
@@ -51,12 +57,13 @@ export default{
     methods:{
         ...mapMutations(['HEADERTITLE']),
         get_content(){
-            console.log(this.formData)
-            for(let i=0; i<this.formData.length;i++){
-                if(this.formData[i]['index']){
-                    delete this.formData[i].index;
-                }
-            }
+            // for(let i=0; i<this.formData.length;i++){
+            //     if(this.formData[i]['index']){
+            //         delete this.formData[i].index;
+            //     }
+            // }
+
+            console.log(this.copys)
         },
         add(){
             //新增一个

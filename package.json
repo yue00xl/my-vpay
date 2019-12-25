@@ -22,6 +22,7 @@
     "hbhbrowser": "git+http://gitlab.jiehun.tech/fed/base/hbhbrowser.git#0.0.1",
     "mint-ui": "^2.2.13",
     "postdata": "git+http://gitlab.jiehun.tech/fed/base/postdata.git#tag_0.1.0",
+    "vcolorpicker": "^0.1.8",
     "vconsole": "^3.3.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",

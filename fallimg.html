@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>xxxx</title>
+<link rel="stylesheet" href="./static/css/fallimg.css" />
+<style>
+.ready{
+    width:281px;
+    border: 1px solid red;
+}
+.ready img{
+    width:100%;
+    height: 100%;
+}
+.init{
+    width:281px;
+    border: 1px solid red;
+    opacity: 0;
+}
+.init img{
+        /* width:100%;
+        height: 100%; */
+    }
+</style>
+<script src="./static/jquery.1-11.min.js"></script>
+</head>
+<body>
+        <div id="cells" class="wall">
+            <div class="init" data-h="300">
+                <img src="https://img.tthunbohui.cn/dmp/u/community/1527523200/jh-img-orig-ga_1001322720484048896_326_220_19493.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="600">
+                <img src="https://img.tthunbohui.cn/dmp/u/community/1570809600/jh-img-orig-ga_1182893478816153600_1920_1200_560491.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="400">
+                <img src="https://img.tthunbohui.cn/dmp/u/community/1571328000/jh-img-orig-ga_1185118920612675584_1200_900_287174.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="420">
+                <img src="https://img.tthunbohui.cn/dmp/u/community/1570723200/jh-img-orig-ga_1182481134810202112_280_187_141327.png@!600W" alt="">
+            </div>
+            <div class="init" data-h="400">
+                <img src="https://img.tthunbohui.cn/dmp/u/community/1539100800/jh-img-orig-ga_1049866242393178112_750_500_726626.png@!600W" alt="">
+            </div>
+            <div class="init" data-h="200">
+                    <img src="https://img.tthunbohui.cn/dmp/s/merchant/1540224000/jh-img-orig-ga_1054577905067425792_883_883_445493.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="300">
+                    <img src="https://img.tthunbohui.cn/dmp/s/merchant/1540224000/jh-img-orig-ga_1054647209184002048_360_360_116116.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="232">
+                    <img src="https://img.tthunbohui.cn/dmp/u/community/1527004800/jh-img-orig-ga_999235583903186944_180_135_12303.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="403">
+                    <img src="https://img.tthunbohui.cn/dmp/u/community/1527091200/jh-img-orig-ga_999602446717861888_469_290_38464.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="434">
+                    <img src="https://img.tthunbohui.cn/dmp/u/community/1527091200/jh-img-orig-ga_999467274261413888_5760_3840_1187181.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="232">
+                    <img src="https://img.tthunbohui.cn/dmp/u/community/1534435200/jh-img-orig-ga_1030346446429552640_750_500_677311.png@!600W" alt="">
+            </div>
+            <div class="init" data-h="434">
+                    <img src="https://img.tthunbohui.cn/dmp/u/community/1527523200/jh-img-orig-ga_1001322922720804864_500_444_72229.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="545">
+                    <img src="https://img.tthunbohui.cn/dmp/u/community/1527523200/jh-img-orig-ga_1001344946457460736_500_334_28966.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="432">
+                    <img src="https://img.tthunbohui.cn/dmp/u/community/1527523200/jh-img-orig-ga_1001346100226605056_500_438_35383.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="434">
+                    <img src="https://img.tthunbohui.cn/dmp/u/community/1527523200/jh-img-orig-ga_1001346204572499968_500_333_17132.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="434">
+                    <img src="https://img.tthunbohui.cn/dmp/u/community/1527523200/jh-img-orig-ga_1001427131990458368_500_444_72229.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="340">
+                    <img src="https://img.tthunbohui.cn/dmp/u/community/1527609600/jh-img-orig-ga_1001703829063516160_150_188_48735.png@!600W" alt="">
+            </div>
+            <div class="init" data-h="542">
+                    <img src="https://img.tthunbohui.cn/dmp/u/community/1527091200/jh-img-orig-ga_999608176170680320_500_705_66225.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="343">
+                    <img src="https://img.tthunbohui.cn/dmp/u/community/1539878400/jh-img-orig-ga_1053120738829336576_1067_600_151501.JPG@!600W" alt="">
+            </div>
+            <div class="init" data-h="232">
+                    <img src="https://img.tthunbohui.cn/dmp/s/merchant/1539964800/jh-img-orig-ga_1053471364373348352_313_313_76694.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="645">
+                    <img src="https://img.tthunbohui.cn/dmp/u/community/1527523200/jh-img-orig-ga_1001439563056070656_500_751_28542.jpg@!600W" alt="">
+            </div>
+            <div class="init" data-h="343">
+                    <img src="https://img.tthunbohui.cn/dmp/u/community/1527523200/jh-img-orig-ga_1001439708615196672_700_1050_89465.jpeg@!600W" alt="">
+            </div>
+        </div>
+    
+    <div id="template"></div>
+    <div id="gonglve_load"></div>
+    <script>
+        console.log(11)
+        let  Img = $('.init');
+        for(let i=0; i<Img.length; i++){
+            $(Img[i]).height($(Img[i]).attr('data-h'))
+        }
+    </script>
+    <script src="./static/fallimg.js"></script>
+</body>
+</html>
+ 
