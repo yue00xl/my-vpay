@@ -78,6 +78,10 @@ export default {
         {
           name:'基于element-ui table拖动排序',
           url:'/sortTable'
+        },
+        {
+          name:'questElement',
+          url:'/questelement'
         }
       ]
     }

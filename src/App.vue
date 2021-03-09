@@ -19,10 +19,21 @@ export default {
       routerHeight:''
     }
   },
+  watch:{
+    $route(to, from) {
+      if (window.$action) {
+        window.$action._init();
+      }
+    }
+  },
   mounted(){
     // this.$store.commit('HEADERTITLE','首页');
     // this.Header = this.$refs.defaultHeader.$refs.defaultHeader.clientHeight;
     // this.routerHeight = window.innerHeight - this.Header;
+    window.$action = new postdata({
+      appkey:'hunbasha',
+      //excludeurl:['suctionTop']
+    })
   },
   computed:{
     ...mapState(['headersTitle'])

@@ -20,6 +20,7 @@ import elseSwitch from '@/components/common/elseSwitch'
 import vueModel from '@/components/common/vue_model'
 import algorithm from '@/components/common/algorithm'
 import sortTable from '@/components/common/Sortable'
+import questElement from '@/components/common/quest_element'
 
 Vue.use(Router)
 
@@ -118,6 +119,11 @@ export default new Router({
       path: '/sortTable',
       name: 'sortTable',
       component: sortTable
+    },
+    {
+      path: '/questelement',
+      name: 'questelement',
+      component: questElement
     }
   ]
 })

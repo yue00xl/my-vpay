@@ -16,7 +16,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './assets/css/common.css'
 
 
-
 /* eslint-disable no-new */
 router.beforeEach((to,form,next)=>{
   // console.log(to);

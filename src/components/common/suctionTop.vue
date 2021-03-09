@@ -2,6 +2,9 @@
 
 <template>
     <div class="suctionTop" ref="suctionTop">
+        <div>
+            <a href="javascript:;" class="action_post_web_data" data-action="{actionName:'1111'}">跳a链接</a>
+        </div>
         <div class="top"></div>
         <h2 ref="fixedHeaderRoot" id="fixedHeaderRoot" :class="{'isFixed':headerFixed}">
             <span v-for="item in 100">
@@ -26,6 +29,14 @@ export default{
         }
     },
     mounted(){
+        setTimeout(()=>{
+            // if(window.$action){
+            //     window.$action.h_custompage({
+            //         actionParm:{'index':'99999'},
+            //         scmid:'12121'
+            //     })
+            // }
+        },1000)
         // handleScroll为页面滚动的监听回调
         this.$nextTick(function(){
             this.$refs.suctionTop.addEventListener('scroll', this.handleScroll);
