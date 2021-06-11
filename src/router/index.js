@@ -2,25 +2,28 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import demoList from '@/components/demoList'
+
+
+const _import = file => require('@/components/common' + file + '.vue').default
+
+// console.log(require('../components'));
+// console.log(process.env.NODE_ENV);
+
 import suctionTop from '@/components/common/suctionTop'
-import Promises from '@/components/common/Promise'
+import Promises from '@/components/common/promise'
 import flex from '@/components/common/flex'
-import vueRouter from '@/components/common/vueRouter'
-import routerOne from '@/components/common/Router/router_one'
-import routerTwo from '@/components/common/Router/router_two'
 import debounce from '@/components/common/debounce'
 import Input from '@/components/common/Input'
 import popState from '@/components/common/popstate'
 import uploadFile from '@/components/common/uploadFile'
 import Arrays from '@/components/common/Array'
 import Functions from '@/components/common/function'
-import vueSlot from '@/components/common/vue_slot'
-import vueSlot2 from '@/components/common/vue_slot2'
 import elseSwitch from '@/components/common/elseSwitch'
 import vueModel from '@/components/common/vue_model'
 import algorithm from '@/components/common/algorithm'
 import sortTable from '@/components/common/Sortable'
 import questElement from '@/components/common/quest_element'
+import spanMethods from '@/components/common/spanMethods'
 
 Vue.use(Router)
 
@@ -38,92 +41,78 @@ export default new Router({
     },
     {
       path: '/suctionTop',
-      name: 'suctionTop',
+      name: '吸顶效果',
       component: suctionTop,
     },
     {
       path: '/promises',
-      name: 'Promises',
+      name: 'ES6 promise',
       component: Promises,
     },
     {
-      path: '/flex',
-      name: 'flex',
+      path: '/npms',
+      name: '封装npm包使用',
       component: flex,
     },
     {
-      path: '/vueRouter',
-      name: 'vueRouter',
-      component: vueRouter,
-      children:[
-        {path:'one',name:'routerOne',component:routerOne,meta:{keepAlive:true}},
-        {path:'two',name:'routerTwo',component:routerTwo,meta:{keepAlive:false}}
-      ]
-    },
-    {
       path: '/debounce',
-      name: 'debounce',
+      name: 'JS的节流、防抖及使用场景',
       component: debounce,
     },
     {
       path: '/Inputs',
-      name: 'Input',
+      name: 'Input各种坑',
       component: Input,
     },
     {
       path: '/popstate',
-      name: 'popState',
+      name: '监听浏览器返回',
       component: popState,
     },
     {
       path: '/uploadfile',
-      name: 'uploadFile',
+      name: '上传视频前进行预览',
       component: uploadFile
     },
     {
       path: '/array',
-      name: 'array',
+      name: '数组和对象的一些操作',
       component: Arrays
     },
     {
       path: '/function',
-      name: 'function',
+      name: '函数传参更优雅的方式',
       component: Functions
     },
     {
-      path: '/vue_slot',
-      name: 'slot',
-      component: vueSlot
-    },
-    {
-      path: '/vue_slot2',
-      name: 'slot2',
-      component: vueSlot2
-    },
-    {
       path: '/else_switch',
-      name: 'elseSwitch',
+      name: 'JavaScript 复杂判断的更优雅写法',
       component: elseSwitch
     },
     {
       path: '/vuemodel',
-      name: 'vueModel',
+      name: 'vue双向绑定v-model',
       component: vueModel
     },
     {
       path: '/algorithm',
-      name: 'algorithm',
+      name: 'js基础算法',
       component: algorithm
     },
     {
       path: '/sortTable',
-      name: 'sortTable',
+      name: '基于element-ui table拖动排序',
       component: sortTable
     },
     {
       path: '/questelement',
-      name: 'questelement',
+      name: '前端导出word',
       component: questElement
+    },
+    {
+      path: '/spanMethods',
+      name: '合并单元格',
+      component: spanMethods
     }
   ]
 })

@@ -14,78 +14,20 @@ export default {
   data () {
     return {
       msg: '各类好玩的demo集合',
-      demolist:[
-        { 
-          name:'吸顶效果',
-          url:'/suctionTop'
-        },
-        {
-          name:'ES6',
-          url:'/promises'
-        },
-        {
-          name:'封装npm包使用',
-          url:'/flex'
-        },
-        {
-          name:'vueRouter',
-          url:'/vueRouter'
-        },
-        {
-          name:'JS的节流、防抖及使用场景',
-          url:'/debounce'
-        },
-        {
-          name:'Input各种坑',
-          url:'/Inputs'
-        },
-        {
-          name:'监听浏览器返回',
-          url:'/popstate'
-        },
-        {
-          name:'上传视频前进行预览',
-          url:'/uploadfile'
-        },
-        {
-          name:'数组和对象的一些操作',
-          url:'/array'
-        },
-        {
-          name:'函数传参更优雅的方式',
-          url:'/function'
-        },
-        {
-          name:'vue-slot的使用-1',
-          url:'/vue_slot'
-        },
-        {
-          name:'vue-slot的使用-2',
-          url:'/vue_slot2'
-        },
-        {
-          name:'JavaScript 复杂判断的更优雅写法',
-          url:'/else_switch'
-        },
-        {
-          name:'vue双向绑定v-model',
-          url:'/vuemodel'
-        },
-        {
-          name:'js基础算法',
-          url:'/algorithm'
-        },
-        {
-          name:'基于element-ui table拖动排序',
-          url:'/sortTable'
-        },
-        {
-          name:'questElement',
-          url:'/questelement'
-        }
-      ]
+      demolist:[]
     }
-  }
+  },
+  created(){
+    let routes = this.$router.options.routes;
+    let demoList = [];
+    routes.forEach((item)=>{
+      demoList.push({
+        url:item.path,
+        name:item.name
+      })
+    })
+    this.demolist = [...demoList]
+  },
 }
 </script>
 

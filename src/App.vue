@@ -21,13 +21,16 @@ export default {
   },
   watch:{
     $route(to, from) {
+      this.$store.commit('HEADERTITLE',to.name);
       if (window.$action) {
         window.$action._init();
       }
     }
   },
+  created(){
+    
+  },
   mounted(){
-    // this.$store.commit('HEADERTITLE','首页');
     // this.Header = this.$refs.defaultHeader.$refs.defaultHeader.clientHeight;
     // this.routerHeight = window.innerHeight - this.Header;
     window.$action = new postdata({
