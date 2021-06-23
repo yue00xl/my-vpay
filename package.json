@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "ali-oss": "^6.10.0",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "docxtemplater": "^3.21.0",
     "docxtemplater-image-module-free": "^1.1.1",
     "element-ui": "^2.15.2",
