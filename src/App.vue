@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <default-header :title="headersTitle" ref="defaultHeader"></default-header>
-    <router-view  class="router_view" :style="{height:routerHeight+'px'}"/>
+    <router-view  class="router_view" />
   </div>
 </template>
 
@@ -63,7 +63,7 @@ body,html{
   -moz-osx-font-smoothing: grayscale;
 }
 .router_view{
-  height: 100%;
-  overflow: auto;
+  /* height: 100%;
+  overflow: auto; */
 }
 </style>

@@ -24,6 +24,7 @@ import algorithm from '@/components/common/algorithm'
 import sortTable from '@/components/common/Sortable'
 import questElement from '@/components/common/quest_element'
 import spanMethods from '@/components/common/spanMethods'
+import canvas from '@/components/common/canvas'
 
 Vue.use(Router)
 
@@ -113,6 +114,11 @@ export default new Router({
       path: '/spanMethods',
       name: '合并单元格',
       component: spanMethods
+    },
+    {
+      path: '/canvas',
+      name: 'canvas',
+      component: canvas
     }
   ]
 })
